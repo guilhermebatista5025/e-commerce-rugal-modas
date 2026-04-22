@@ -115,13 +115,13 @@ function AdminSidebar() {
       {/* Logout */}
       <div style={{ padding: 'var(--space-4) var(--space-3)', borderTop: '1px solid var(--border-color)' }}>
         <a href="/" style={{ display:'flex',alignItems:'center',gap:8,fontSize:'var(--fs-sm)',color:'var(--text-secondary)',textDecoration:'none',padding:'8px var(--space-4)',borderRadius:'var(--radius-md)' }}>
-          🏠 Ver Loja
+           Ver Loja
         </a>
         <button
           onClick={logout}
           style={{ display:'flex',alignItems:'center',gap:8,width:'100%',padding:'8px var(--space-4)',background:'transparent',border:'none',cursor:'pointer',fontSize:'var(--fs-sm)',color:'var(--color-danger)',fontFamily:'var(--font-body)',borderRadius:'var(--radius-md)' }}
         >
-          🚪 Sair
+           Sair
         </button>
       </div>
     </aside>

@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 import styles from './Footer.module.css';
 
-const WHATSAPP = '5527999999999';
+const WHATSAPP = '5527998803770';
 
 export default function Footer() {
   return (
@@ -43,7 +43,6 @@ export default function Footer() {
           <ul>
             <li><Link to="/loja?category=Feminino">Feminino</Link></li>
             <li><Link to="/loja?category=Masculino">Masculino</Link></li>
-            <li><Link to="/loja?category=Infantil">Infantil</Link></li>
             <li><Link to="/loja?category=Calçados">Calçados</Link></li>
             <li><Link to="/loja?category=Acessórios">Acessórios</Link></li>
           </ul>
@@ -65,7 +64,7 @@ export default function Footer() {
 
       <div className={styles.bottom}>
         <p>© {new Date().getFullYear()} Rugal Modas. Todos os direitos reservados.</p>
-        <p>Desenvolvido com ❤️</p>
+        <p>Desenvolvido por Guilherme Batista & Thiago Martins</p>
       </div>
     </footer>
   );

@@ -1,7 +1,7 @@
 // src/utils/generateMessage.js
 import { formatPrice } from './formatPrice';
 
-const WHATSAPP_NUMBER = '5527999999999'; // ← substitua pelo número real
+const WHATSAPP_NUMBER = '5527998803770'; // ← substitua pelo número real
 
 /**
  * Gera mensagem formatada e abre WhatsApp
@@ -28,7 +28,7 @@ export function sendToWhatsApp({ items, totalPrice, customer }) {
     `💳 *Pagamento:* ${customer.payment}`,
     `🚚 *Entrega:* ${customer.delivery}`,
     '',
-    '_Pedido gerado pelo site Rugal Modas_ 🌟',
+    '_Pedido gerado pelo site Rugal Modas_',
   ].join('\n');
 
   const encoded = encodeURIComponent(msg);

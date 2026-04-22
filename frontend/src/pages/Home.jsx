@@ -112,7 +112,7 @@ export default function Home() {
               rel="noreferrer"
               className={styles.whatsappBtn}
             >
-              💬 Falar no WhatsApp
+              Falar no WhatsApp
             </a>
           </div>
         </div>

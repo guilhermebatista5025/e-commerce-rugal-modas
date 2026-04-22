@@ -150,7 +150,7 @@ export default function Carrinho() {
                     value={form.city}
                     onChange={e => set('city', e.target.value)}
                     error={errors.city}
-                    placeholder="Vila Velha / ES"
+                    placeholder="Linhares / ES"
                   />
                   <Input
                     label="CEP *"
@@ -183,7 +183,7 @@ export default function Carrinho() {
                 <div className={styles.formActions}>
                   <button className={styles.backBtn} onClick={() => setStep(1)}>← Voltar</button>
                   <button className={styles.whatsappBtn} onClick={handleFinish}>
-                    💬 Enviar Pedido pelo WhatsApp
+                    Enviar Pedido pelo WhatsApp
                   </button>
                 </div>
               </div>
