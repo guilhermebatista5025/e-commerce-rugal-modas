@@ -1,0 +1,96 @@
+/* src/components/ui/Button.module.css */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-weight: var(--fw-semi);
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    opacity var(--transition-fast);
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.08);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.btn:hover::after  { opacity: 1; }
+.btn:active { transform: scale(0.97); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* === VARIANTES === */
+.primary {
+  background: var(--color-gold);
+  color: var(--color-black);
+}
+.primary:hover { background: var(--color-gold-light); box-shadow: var(--shadow-gold); }
+
+.secondary {
+  background: transparent;
+  color: var(--color-gold);
+  border: 1.5px solid var(--color-gold);
+}
+.secondary:hover { background: rgba(224,168,72,0.1); }
+
+.dark {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+.dark:hover { border-color: var(--color-gold); color: var(--color-gold); }
+
+.danger {
+  background: var(--color-danger);
+  color: #fff;
+}
+.danger:hover { background: var(--color-danger-dark); }
+
+.promo {
+  background: var(--color-promo);
+  color: #fff;
+}
+.promo:hover { background: var(--color-promo-dark); }
+
+.ghost {
+  background: transparent;
+  color: var(--text-secondary);
+}
+.ghost:hover { color: var(--color-gold); }
+
+/* === TAMANHOS === */
+.sm { padding: 6px 14px; font-size: var(--fs-sm); }
+.md { padding: 10px 22px; font-size: var(--fs-base); }
+.lg { padding: 14px 32px; font-size: var(--fs-md); }
+.xl { padding: 16px 40px; font-size: var(--fs-lg); }
+
+/* === EXTRAS === */
+.fullWidth { width: 100%; }
+
+.icon { display: inline-flex; align-items: center; }
+
+/* Loading spinner */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(0,0,0,0.2);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }

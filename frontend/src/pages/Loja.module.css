@@ -1,0 +1,62 @@
+/* src/pages/Loja.module.css */
+.page {
+  padding-top: calc(var(--navbar-height) + var(--space-10));
+  padding-bottom: var(--space-20);
+  min-height: 100vh;
+}
+
+.header {
+  margin-bottom: var(--space-8);
+}
+.title {
+  font-family: var(--font-display);
+  font-size: var(--fs-3xl);
+  color: var(--color-gold);
+}
+.subtitle {
+  color: var(--text-secondary);
+  margin-top: var(--space-2);
+}
+
+/* Skeleton */
+.loadingGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-6);
+}
+.skeleton {
+  aspect-ratio: 3/5;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(90deg, var(--bg-card) 25%, var(--color-gray-border) 50%, var(--bg-card) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+/* Empty state */
+.empty {
+  text-align: center;
+  padding: var(--space-20) 0;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  font-size: var(--fs-lg);
+}
+.resetBtn {
+  padding: 10px 24px;
+  background: var(--color-gold);
+  color: var(--color-black);
+  border: none;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-weight: var(--fw-semi);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+.resetBtn:hover { background: var(--color-gold-light); }
