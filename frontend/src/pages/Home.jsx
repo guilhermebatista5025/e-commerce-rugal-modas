@@ -11,10 +11,10 @@ import { products } from '../data/products';
 const FEATURED = products.filter(p => p.promo).slice(0, 4);
 
 const CATEGORIES_SHOWCASE = [
-  { label: 'Feminino',   img: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400&h=500&fit=crop', to: '/loja?category=Feminino' },
-  { label: 'Masculino',  img: 'https://images.unsplash.com/photo-1516826957135-700dedea698c?w=400&h=500&fit=crop', to: '/loja?category=Masculino' },
-  { label: 'Infantil',   img: 'https://images.unsplash.com/photo-1519278409-1f56fdda7fe5?w=400&h=500&fit=crop', to: '/loja?category=Infantil' },
-  { label: 'Calçados',   img: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=500&fit=crop', to: '/loja?category=Calçados' },
+  { label: 'Relógios',   img: '../public/images/categorias/relogio1.png', to: '/loja?category=Relógio' },
+  { label: 'Masculino',  img: '../public/images/categorias/conjunto1.png', to: '/loja?category=Masculino' },
+  { label: 'Óculos',   img: '../public/images/categorias/oculos1.png', to: '/loja?category=Óculos' },
+  { label: 'Calçados',   img: '../public/images/categorias/tenis1.png', to: '/loja?category=Calçados' },
 ];
 
 export default function Home() {
@@ -27,7 +27,7 @@ export default function Home() {
       <section className={styles.quickAccess}>
         <div className="container">
           <Link to="/loja" className={styles.shopBtn}>
-            🛍️ Acessar Loja Completa
+             Acessar Loja Completa
           </Link>
         </div>
       </section>
@@ -107,7 +107,7 @@ export default function Home() {
               <p>Fale diretamente com nossa equipe pelo WhatsApp!</p>
             </div>
             <a
-              href="https://wa.me/5527999999999"
+              href="https://wa.me/5527998803770"
               target="_blank"
               rel="noreferrer"
               className={styles.whatsappBtn}

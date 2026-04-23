@@ -6,16 +6,16 @@ import styles from './Carousel.module.css';
 const SLIDES = [
   {
     id: 1,
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&h=700&fit=crop',
-    title: 'Nova Coleção Verão',
-    subtitle: 'Peças leves, modernas e cheias de estilo para os dias quentes.',
+    image: '../public/images/banners/imagem1.png',
+    title: 'Nova Coleção Jaquetas',
+    subtitle: 'Peças leves, modernas e cheias de estilo para os dias frios.',
     cta: 'Ver Coleção',
     link: '/loja?category=Feminino',
     badge: 'NOVO',
   },
   {
     id: 2,
-    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1400&h=700&fit=crop',
+    image: '../public/images/banners/imagem2.png',
     title: 'Moda Masculina',
     subtitle: 'Do casual ao social, encontre o look perfeito para cada momento.',
     cta: 'Explorar',
@@ -24,7 +24,7 @@ const SLIDES = [
   },
   {
     id: 3,
-    image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1400&h=700&fit=crop',
+    image: '../public/images/banners/imagem3.png',
     title: 'Promoções Especiais',
     subtitle: 'Até 40% OFF em centenas de produtos selecionados.',
     cta: 'Ver Ofertas',

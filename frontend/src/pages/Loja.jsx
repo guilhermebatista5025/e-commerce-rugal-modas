@@ -40,7 +40,7 @@ export default function Loja() {
           </div>
         ) : filtered.length === 0 ? (
           <div className={styles.empty}>
-            <p>😕 Nenhum produto encontrado com esses filtros.</p>
+            <p>Nenhum produto encontrado com esses filtros.</p>
             <button className={styles.resetBtn} onClick={resetFilters}>
               Limpar filtros
             </button>
