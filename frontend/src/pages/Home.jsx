@@ -88,11 +88,14 @@ export default function Home() {
               <Link to="/loja" className={styles.ctaAbout}>Conhecer Produtos</Link>
             </div>
             <div className={styles.videoWrap}>
-              <div className={styles.videoPlaceholder}>
-                <div className={styles.playIcon}>▶</div>
-                <p>Vídeo da Loja</p>
-                <small>Adicione seu vídeo em /public/videos/store.mp4</small>
-              </div>
+              <video
+                src="#"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className={styles.storeVideo}
+              />
             </div>
           </div>
         </div>

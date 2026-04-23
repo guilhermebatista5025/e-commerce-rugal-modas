@@ -157,30 +157,12 @@
   overflow: hidden;
   aspect-ratio: 16/9;
 }
-.videoPlaceholder {
+.storeVideo {
+  
   width: 100%;
   height: 100%;
-  background: var(--bg-card);
-  border: 2px dashed var(--border-color);
-  border-radius: var(--radius-xl);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-3);
-  color: var(--text-secondary);
-  min-height: 280px;
-}
-.playIcon {
-  width: 64px; height: 64px;
-  border-radius: 50%;
-  background: var(--color-gold);
-  color: var(--color-black);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  padding-left: 4px;
+  object-fit: cover;
+  display: block;
 }
 
 /* WhatsApp CTA */
