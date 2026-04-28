@@ -6,7 +6,7 @@ import styles from './Carousel.module.css';
 const SLIDES = [
   {
     id: 1,
-    image: '../public/images/banners/imagem1.png',
+    image: '../images/banners/imagem1.png',
     title: 'Nova Coleção Jaquetas',
     subtitle: 'Peças leves, modernas e cheias de estilo para os dias frios.',
     cta: 'Ver Coleção',
@@ -15,7 +15,7 @@ const SLIDES = [
   },
   {
     id: 2,
-    image: '../public/images/banners/imagem2.png',
+    image: '../images/banners/imagem2.png',
     title: 'Moda Masculina',
     subtitle: 'Do casual ao social, encontre o look perfeito para cada momento.',
     cta: 'Explorar',
@@ -24,7 +24,7 @@ const SLIDES = [
   },
   {
     id: 3,
-    image: '../public/images/banners/imagem3.png',
+    image: '../images/banners/imagem3.png',
     title: 'Promoções Especiais',
     subtitle: 'Até 40% OFF em centenas de produtos selecionados.',
     cta: 'Ver Ofertas',
