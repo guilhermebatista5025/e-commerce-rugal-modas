@@ -1,1 +1,1 @@
-Coloque aqui o logo da loja (logo.png).
+Coloque aqui as imagens dos banners do carrossel.
