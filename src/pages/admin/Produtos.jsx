@@ -2,11 +2,13 @@
 import { useState } from 'react';
 import { useProducts } from '../../context/ProductContext';
 import { formatPrice } from '../../utils/formatPrice';
+import UploadImagem from '../../components/UploadImagem';
 import Input from '../../components/ui/Input';
 import Button from '../../components/ui/Button';
 import Modal from '../../components/ui/Modal';
 import { CATEGORIES, BRANDS, SIZES } from '../../data/products';
 import styles from './Admin.module.css';
+
 
 const EMPTY = {
   name: '', code: '', brand: BRANDS[1], category: CATEGORIES[1],
@@ -17,10 +19,10 @@ const EMPTY = {
 
 export default function AdminProdutos() {
   const { products, addProduct, updateProduct, deleteProduct } = useProducts();
-  const [form, setForm]         = useState(EMPTY);
-  const [editing, setEditing]   = useState(null);
+  const [form, setForm] = useState(EMPTY);
+  const [editing, setEditing] = useState(null);
   const [delModal, setDelModal] = useState(null);
-  const [search, setSearch]     = useState('');
+  const [search, setSearch] = useState('');
 
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
 
@@ -42,7 +44,7 @@ export default function AdminProdutos() {
       promoPrice: form.promo ? parseFloat(form.promoPrice) : null,
     };
     if (editing) { updateProduct({ ...data, _id: editing }); setEditing(null); }
-    else          addProduct(data);
+    else addProduct(data);
     setForm(EMPTY);
   };
 
@@ -80,12 +82,26 @@ export default function AdminProdutos() {
           <Input type="select" label="Marca" value={form.brand} onChange={e => set('brand', e.target.value)}>
             {BRANDS.filter(b => b !== 'Todas').map(b => <option key={b}>{b}</option>)}
           </Input>
-          <Input label="URL da Imagem" value={form.image} onChange={e => set('image', e.target.value)} placeholder="https://..." />
+          <div className={styles.uploadBox}>
+            <label className={styles.uploadLabel}>
+              Imagem do Produto
+            </label>
+
+            <UploadImagem setImage={(url) => set('image', url)} />
+    
+            {form.image && (
+              <img
+                src={form.image}
+                alt="preview"
+                className={styles.uploadPreview}
+              />
+            )}
+          </div>
 
           <Input label="Descrição" type="textarea" value={form.description} onChange={e => set('description', e.target.value)} placeholder="Descreva o produto..." />
 
           <div>
-            <label style={{ display:'flex', alignItems:'center', gap:8, cursor:'pointer', fontSize:'var(--fs-sm)', color:'var(--text-secondary)', marginBottom:8 }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontSize: 'var(--fs-sm)', color: 'var(--text-secondary)', marginBottom: 8 }}>
               <input type="checkbox" checked={form.promo} onChange={e => set('promo', e.target.checked)} />
               Em promoção?
             </label>
@@ -95,10 +111,10 @@ export default function AdminProdutos() {
           </div>
 
           <div>
-            <p style={{ fontSize:'var(--fs-sm)', color:'var(--text-secondary)', marginBottom:8 }}>Tamanhos disponíveis</p>
-            <div style={{ display:'flex', flexWrap:'wrap', gap:8 }}>
+            <p style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-secondary)', marginBottom: 8 }}>Tamanhos disponíveis</p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
               {SIZES.map(s => (
-                <label key={s} style={{ display:'flex', alignItems:'center', gap:4, cursor:'pointer', fontSize:'var(--fs-xs)' }}>
+                <label key={s} style={{ display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer', fontSize: 'var(--fs-xs)' }}>
                   <input type="checkbox" checked={form.sizes.includes(s)} onChange={() => toggleSize(s)} />
                   {s}
                 </label>
@@ -108,17 +124,17 @@ export default function AdminProdutos() {
 
           {form.sizes.length > 0 && (
             <div>
-              <p style={{ fontSize:'var(--fs-sm)', color:'var(--text-secondary)', marginBottom:8 }}>Estoque por tamanho</p>
-              <div style={{ display:'flex', flexWrap:'wrap', gap:10 }}>
+              <p style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-secondary)', marginBottom: 8 }}>Estoque por tamanho</p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
                 {form.sizes.map(s => (
-                  <div key={s} style={{ display:'flex', flexDirection:'column', gap:4, alignItems:'center' }}>
-                    <label style={{ fontSize:'var(--fs-xs)', color:'var(--color-gold)' }}>{s}</label>
+                  <div key={s} style={{ display: 'flex', flexDirection: 'column', gap: 4, alignItems: 'center' }}>
+                    <label style={{ fontSize: 'var(--fs-xs)', color: 'var(--color-gold)' }}>{s}</label>
                     <input
                       type="number"
                       min="0"
                       value={form.stock[s] || 0}
                       onChange={e => set('stock', { ...form.stock, [s]: parseInt(e.target.value) || 0 })}
-                      style={{ width:56, padding:'4px 6px', background:'var(--bg-secondary)', border:'1px solid var(--border-color)', borderRadius:'var(--radius-sm)', color:'var(--text-primary)', textAlign:'center', fontFamily:'var(--font-body)' }}
+                      style={{ width: 56, padding: '4px 6px', background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', color: 'var(--text-primary)', textAlign: 'center', fontFamily: 'var(--font-body)' }}
                     />
                   </div>
                 ))}
@@ -157,14 +173,14 @@ export default function AdminProdutos() {
                 <td>{p.category}</td>
                 <td>
                   {p.promo
-                    ? <><s style={{color:'var(--text-secondary)',fontSize:'var(--fs-xs)'}}>{formatPrice(p.price)}</s>{' '}<strong style={{color:'var(--color-promo)'}}>{formatPrice(p.promoPrice)}</strong></>
+                    ? <><s style={{ color: 'var(--text-secondary)', fontSize: 'var(--fs-xs)' }}>{formatPrice(p.price)}</s>{' '}<strong style={{ color: 'var(--color-promo)' }}>{formatPrice(p.promoPrice)}</strong></>
                     : formatPrice(p.price)
                   }
                 </td>
                 <td>{p.promo ? <span className={styles.badgePromo}>SIM</span> : <span className={styles.badgeNo}>NÃO</span>}</td>
                 <td>
                   <div className={styles.actionBtns}>
-                    <button className={styles.editBtn}   onClick={() => handleEdit(p)}>Editar</button>
+                    <button className={styles.editBtn} onClick={() => handleEdit(p)}>Editar</button>
                     <button className={styles.deleteBtn} onClick={() => setDelModal(p._id)}>Excluir</button>
                   </div>
                 </td>
@@ -176,12 +192,12 @@ export default function AdminProdutos() {
 
       {/* Confirm delete */}
       <Modal isOpen={!!delModal} onClose={() => setDelModal(null)} title="Confirmar Exclusão" size="sm">
-        <p style={{ color:'var(--text-secondary)', marginBottom:'var(--space-6)' }}>
+        <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-6)' }}>
           Tem certeza que deseja excluir este produto? Esta ação não pode ser desfeita.
         </p>
-        <div style={{ display:'flex', gap:'var(--space-3)' }}>
+        <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
           <Button variant="danger" onClick={handleDelete} fullWidth>Excluir</Button>
-          <Button variant="dark"   onClick={() => setDelModal(null)} fullWidth>Cancelar</Button>
+          <Button variant="dark" onClick={() => setDelModal(null)} fullWidth>Cancelar</Button>
         </div>
       </Modal>
     </div>

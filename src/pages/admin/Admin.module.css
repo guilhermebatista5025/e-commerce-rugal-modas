@@ -190,6 +190,62 @@
 }
 .deleteBtn:hover { background: var(--color-danger); color: #fff; }
 
+/* Upload imagem */
+.uploadBox {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.uploadLabel {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+}
+
+.uploadPreview {
+  width: 100%;
+  max-width: 140px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  margin-top: var(--space-2);
+} 
+
+/* Input de upload custom */
+.uploadInput {
+  display: none;
+}
+
+.uploadButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.uploadButton:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+  background: rgba(224,168,72,0.05);
+}
+
+.uploadButton.hasImage {
+  border-style: solid;
+  color: var(--color-gold);
+}
+
 @media (max-width: 1024px) {
   .statsGrid { grid-template-columns: repeat(2, 1fr); }
   .quickGrid  { grid-template-columns: repeat(2, 1fr); }
