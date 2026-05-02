@@ -11,10 +11,10 @@ import { products } from '../data/products';
 const FEATURED = products.filter(p => p.promo).slice(0, 4);
 
 const CATEGORIES_SHOWCASE = [
-  { label: 'Relógios',   img: '../images/categorias/relogio1.png', to: '/loja?category=Relógio' },
-  { label: 'Masculino',  img: '../images/categorias/conjunto1.png', to: '/loja?category=Masculino' },
-  { label: 'Óculos',   img: '../images/categorias/oculos1.png', to: '/loja?category=Óculos' },
-  { label: 'Calçados',   img: '../images/categorias/tenis1.png', to: '/loja?category=Calçados' },
+  { label: 'Relógios',   img: 'categorias/relogio1.png', to: '/loja?category=Relógio' },
+  { label: 'Masculino',  img: 'categorias/conjunto1.png', to: '/loja?category=Masculino' },
+  { label: 'Óculos',   img: 'categorias/oculos1.png', to: '/loja?category=Óculos' },
+  { label: 'Calçados',   img: 'categorias/tenis1.png', to: '/loja?category=Calçados' },
 ];
 
 export default function Home() {
