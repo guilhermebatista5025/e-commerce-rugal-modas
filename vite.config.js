@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: "./", // 👈 ADICIONA ISSO
+  base: "/", // 👈 ADICIONA ISSO
   server: {
     port: 5173,
     open: true
