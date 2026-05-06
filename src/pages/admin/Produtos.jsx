@@ -7,6 +7,7 @@ import Input from '../../components/ui/Input';
 import Button from '../../components/ui/Button';
 import Modal from '../../components/ui/Modal';
 import { CATEGORIES, BRANDS, SIZES } from '../../data/products';
+import { Pencil, Plus, Trash2 } from 'lucide-react';
 import styles from './Admin.module.css';
 
 
@@ -70,7 +71,9 @@ export default function AdminProdutos() {
 
       {/* Form */}
       <div className={styles.formCard}>
-        <h3 className={styles.formTitle}>{editing ? '✏️ Editar Produto' : '➕ Novo Produto'}</h3>
+        <h3 className={styles.formTitle} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          {editing ? <><Pencil size={20} /> Editar Produto</> : <><Plus size={20} /> Novo Produto</>}
+        </h3>
         <div className={styles.formGrid}>
           <Input label="Nome *" value={form.name} onChange={e => set('name', e.target.value)} placeholder="Nome do produto" />
           <Input label="Código *" value={form.code} onChange={e => set('code', e.target.value)} placeholder="RG-001" />
@@ -180,8 +183,8 @@ export default function AdminProdutos() {
                 <td>{p.promo ? <span className={styles.badgePromo}>SIM</span> : <span className={styles.badgeNo}>NÃO</span>}</td>
                 <td>
                   <div className={styles.actionBtns}>
-                    <button className={styles.editBtn} onClick={() => handleEdit(p)}>Editar</button>
-                    <button className={styles.deleteBtn} onClick={() => setDelModal(p._id)}>Excluir</button>
+                    <button className={styles.editBtn} onClick={() => handleEdit(p)}><Pencil size={14} /> Editar</button>
+                    <button className={styles.deleteBtn} onClick={() => setDelModal(p._id)}><Trash2 size={14} /> Excluir</button>
                   </div>
                 </td>
               </tr>

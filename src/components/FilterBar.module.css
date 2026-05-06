@@ -42,3 +42,19 @@
   color: var(--text-secondary);
 }
 .count strong { color: var(--color-gold); }
+
+@media (max-width: 768px) {
+  .bar { padding: var(--space-4); }
+  .search  { min-width: 100%; flex: unset; }
+  .select, .code { flex: 1; min-width: 120px; }
+}
+
+@media (max-width: 480px) {
+  .row { flex-direction: column; }
+  .search, .select, .code { min-width: 100%; }
+  .reset {
+    width: 100%;
+    text-align: center;
+    height: var(--touch-target);
+  }
+}

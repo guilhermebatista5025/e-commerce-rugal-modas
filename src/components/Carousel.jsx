@@ -1,12 +1,12 @@
 // src/components/Carousel.jsx
-import { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './Carousel.module.css';
 
 const SLIDES = [
   {
     id: 1,
-    image: 'images/imagem1.png',
+    image: '/images/imagem1.png',
     title: 'Nova Coleção Jaquetas',
     subtitle: 'Peças leves, modernas e cheias de estilo para os dias frios.',
     cta: 'Ver Coleção',
@@ -15,7 +15,7 @@ const SLIDES = [
   },
   {
     id: 2,
-    image: 'images/imagem2.png',
+    image: '/images/imagem2.png',
     title: 'Moda Masculina',
     subtitle: 'Do casual ao social, encontre o look perfeito para cada momento.',
     cta: 'Explorar',
@@ -24,7 +24,7 @@ const SLIDES = [
   },
   {
     id: 3,
-    image: 'images/imagem3.png',
+    image: '/images/imagem3.png',
     title: 'Promoções Especiais',
     subtitle: 'Até 40% OFF em centenas de produtos selecionados.',
     cta: 'Ver Ofertas',
@@ -34,8 +34,10 @@ const SLIDES = [
 ];
 
 export default function Carousel({ autoPlay = true, interval = 5000 }) {
+  const navigate = useNavigate();
   const [current, setCurrent] = useState(0);
   const [paused, setPaused]   = useState(false);
+  const touchX = useRef(null);
 
   const next = useCallback(() => setCurrent(c => (c + 1) % SLIDES.length), []);
   const prev = useCallback(() => setCurrent(c => (c - 1 + SLIDES.length) % SLIDES.length), []);
@@ -47,11 +49,26 @@ export default function Carousel({ autoPlay = true, interval = 5000 }) {
     return () => clearInterval(t);
   }, [autoPlay, paused, interval, next]);
 
+  /* === Touch / Swipe === */
+  const handleTouchStart = (e) => {
+    touchX.current = e.touches[0].clientX;
+    setPaused(true);
+  };
+  const handleTouchEnd = (e) => {
+    if (touchX.current === null) return;
+    const delta = touchX.current - e.changedTouches[0].clientX;
+    if (Math.abs(delta) > 50) delta > 0 ? next() : prev();
+    touchX.current = null;
+    setPaused(false);
+  };
+
   return (
     <div
       className={styles.carousel}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       {SLIDES.map((slide, i) => (
         <div
@@ -59,6 +76,7 @@ export default function Carousel({ autoPlay = true, interval = 5000 }) {
           className={[styles.slide, i === current ? styles.active : ''].join(' ')}
           style={{ backgroundImage: `url(${slide.image})` }}
           aria-hidden={i !== current}
+          onClick={() => navigate(slide.link)}
         >
           <div className={styles.overlay} />
           <div className={styles.content}>
@@ -72,18 +90,9 @@ export default function Carousel({ autoPlay = true, interval = 5000 }) {
             )}
             <h1 className={styles.title}>{slide.title}</h1>
             <p className={styles.subtitle}>{slide.subtitle}</p>
-            <Link to={slide.link} className={styles.cta}>{slide.cta}</Link>
           </div>
         </div>
       ))}
-
-      {/* Controls */}
-      <button className={[styles.arrow, styles.arrowPrev].join(' ')} onClick={prev} aria-label="Anterior">
-        ‹
-      </button>
-      <button className={[styles.arrow, styles.arrowNext].join(' ')} onClick={next} aria-label="Próximo">
-        ›
-      </button>
 
       {/* Dots */}
       <div className={styles.dots}>

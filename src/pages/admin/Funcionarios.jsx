@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Input from '../../components/ui/Input';
 import Button from '../../components/ui/Button';
 import Modal from '../../components/ui/Modal';
+import { Users, CheckCircle, Plus, Trash2, Power } from 'lucide-react';
 import styles from './Admin.module.css';
 
 const ROLES = ['Vendedor', 'Caixa', 'Estoquista', 'Gerente', 'Atendente'];
@@ -42,16 +43,16 @@ export default function Funcionarios() {
       {/* Stats */}
       <div className={styles.statsGrid} style={{ gridTemplateColumns: 'repeat(2,1fr)', maxWidth: 420 }}>
         <div className={styles.statCard}>
-          <span className={styles.statIcon}>👥</span>
+          <span className={styles.statIcon}><Users /></span>
           <div>
-            <p className={styles.statValue} style={{ color: 'var(--color-gold)' }}>{employees.length}</p>
+            <p className={styles.statValue} style={{ color: 'var(--admin-primary)' }}>{employees.length}</p>
             <p className={styles.statLabel}>Total</p>
           </div>
         </div>
         <div className={styles.statCard}>
-          <span className={styles.statIcon}>✅</span>
+          <span className={styles.statIcon}><CheckCircle /></span>
           <div>
-            <p className={styles.statValue} style={{ color: 'var(--color-promo)' }}>{employees.filter(e => e.active).length}</p>
+            <p className={styles.statValue} style={{ color: '#10b981' }}>{employees.filter(e => e.active).length}</p>
             <p className={styles.statLabel}>Ativos</p>
           </div>
         </div>
@@ -59,7 +60,9 @@ export default function Funcionarios() {
 
       {/* Form */}
       <div className={styles.formCard}>
-        <h3 className={styles.formTitle}>➕ Cadastrar Funcionário</h3>
+        <h3 className={styles.formTitle} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Plus size={20} /> Cadastrar Funcionário
+        </h3>
         <div className={styles.formGrid}>
           <Input label="Nome *"    value={form.name}  onChange={e => set('name', e.target.value)}  placeholder="Nome completo" />
           <Input label="E-mail *"  value={form.email} onChange={e => set('email', e.target.value)} placeholder="email@rugal.com" type="email" />
@@ -94,9 +97,11 @@ export default function Funcionarios() {
                 <td>
                   <div className={styles.actionBtns}>
                     <button className={styles.editBtn} onClick={() => toggleActive(e.id)}>
-                      {e.active ? 'Desativar' : 'Ativar'}
+                      <Power size={14} /> {e.active ? 'Desativar' : 'Ativar'}
                     </button>
-                    <button className={styles.deleteBtn} onClick={() => setDelModal(e.id)}>Excluir</button>
+                    <button className={styles.deleteBtn} onClick={() => setDelModal(e.id)}>
+                      <Trash2 size={14} /> Excluir
+                    </button>
                   </div>
                 </td>
               </tr>

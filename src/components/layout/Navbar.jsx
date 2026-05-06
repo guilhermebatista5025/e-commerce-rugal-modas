@@ -44,10 +44,7 @@ export default function Navbar() {
         {/* Ações */}
         <div className={styles.actions}>
           {user ? (
-            <div className={styles.userMenu}>
-              <span className={styles.userName}>Olá, {user.name.split(' ')[0]}</span>
-              <button className={styles.logoutBtn} onClick={handleLogout}>Sair</button>
-            </div>
+            <button className={styles.logoutBtn} onClick={handleLogout}>Sair</button>
           ) : (
             <Link to="/login" className={styles.loginBtn}>Entrar</Link>
           )}

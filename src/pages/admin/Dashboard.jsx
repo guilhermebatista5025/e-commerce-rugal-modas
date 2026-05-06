@@ -1,5 +1,6 @@
 // src/pages/admin/Dashboard.jsx
 import { Link } from 'react-router-dom';
+import { ShoppingBag, Tag, AlertTriangle, Package, Users, BarChart3 } from 'lucide-react';
 import { useProducts } from '../../context/ProductContext';
 import { formatPrice } from '../../utils/formatPrice';
 import styles from './Admin.module.css';
@@ -17,17 +18,17 @@ export default function Dashboard() {
   );
 
   const CARDS = [
-    { label: 'Total de Produtos', value: totalProducts, icon: '🛍️', color: 'gold' },
-    { label: 'Em Promoção',       value: promoProducts, icon: '🏷️', color: 'promo' },
-    { label: 'Sem Estoque',       value: outOfStock,    icon: '⚠️', color: 'danger' },
-    { label: 'Itens em Estoque',  value: totalStock,    icon: '📦', color: 'info' },
+    { label: 'Total de Produtos', value: totalProducts, icon: <ShoppingBag />, color: 'gold' },
+    { label: 'Em Promoção',       value: promoProducts, icon: <Tag />,         color: 'promo' },
+    { label: 'Sem Estoque',       value: outOfStock,    icon: <AlertTriangle />, color: 'danger' },
+    { label: 'Itens em Estoque',  value: totalStock,    icon: <Package />,       color: 'info' },
   ];
 
   const QUICK_LINKS = [
-    { to: '/admin/produtos',     label: 'Gerenciar Produtos',   icon: '🛍️' },
-    { to: '/admin/estoque',      label: 'Controle de Estoque',  icon: '📦' },
-    { to: '/admin/funcionarios', label: 'Funcionários',         icon: '👤' },
-    { to: '/admin/relatorios',   label: 'Relatórios',           icon: '📊' },
+    { to: '/admin/produtos',     label: 'Gerenciar Produtos',   icon: <ShoppingBag /> },
+    { to: '/admin/estoque',      label: 'Controle de Estoque',  icon: <Package /> },
+    { to: '/admin/funcionarios', label: 'Funcionários',         icon: <Users /> },
+    { to: '/admin/relatorios',   label: 'Relatórios',           icon: <BarChart3 /> },
   ];
 
   return (

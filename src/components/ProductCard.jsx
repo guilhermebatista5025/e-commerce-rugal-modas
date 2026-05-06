@@ -9,6 +9,7 @@ export default function ProductCard({ product }) {
   const { addItem, toggleCart } = useCart();
   const [selectedSize, setSelectedSize] = useState('');
   const [added, setAdded] = useState(false);
+  const [sizeError, setSizeError] = useState(false);
 
   const price    = product.promo ? product.promoPrice : product.price;
   const discount = discountPercent(product.price, product.promoPrice);
@@ -16,13 +17,17 @@ export default function ProductCard({ product }) {
 
   const handleAdd = (e) => {
     e.preventDefault();
-    if (!selectedSize) {
-      const firstAvail = product.sizes?.find(s => (product.stock?.[s] || 0) > 0);
-      if (!firstAvail) return;
-      addItem(product, firstAvail);
-    } else {
-      addItem(product, selectedSize);
+    // Se o produto tem tamanhos definidos mas nenhum foi selecionado
+    if (product.sizes?.length > 0 && product.sizes[0] !== 'Único' && !selectedSize) {
+      setSizeError(true);
+      setTimeout(() => setSizeError(false), 3000);
+      return;
     }
+    
+    setSizeError(false);
+    // Adiciona o tamanho selecionado ou o primeiro disponível/único
+    const sizeToAdd = selectedSize || (product.sizes?.length ? product.sizes[0] : 'Único');
+    addItem(product, sizeToAdd);
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
     toggleCart();
@@ -77,7 +82,13 @@ export default function ProductCard({ product }) {
                     selectedSize === s ? styles.sizeSel : '',
                     !inStock ? styles.sizeOut : '',
                   ].join(' ')}
-                  onClick={() => inStock && setSelectedSize(s)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (inStock) {
+                      setSelectedSize(s);
+                      setSizeError(false);
+                    }
+                  }}
                   disabled={!inStock}
                   title={!inStock ? 'Indisponível' : s}
                 >
@@ -85,6 +96,7 @@ export default function ProductCard({ product }) {
                 </button>
               );
             })}
+            {sizeError && <div className={styles.sizeError}>Selecione um tamanho!</div>}
           </div>
         )}
 

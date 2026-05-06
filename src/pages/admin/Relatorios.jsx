@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useProducts } from '../../context/ProductContext';
 import { formatPrice } from '../../utils/formatPrice';
 import Button from '../../components/ui/Button';
+import { FileText, DollarSign, ShoppingCart, Package, Trophy } from 'lucide-react';
 import styles from './Admin.module.css';
 
 // Dados mock de vendas
@@ -94,38 +95,38 @@ export default function Relatorios() {
           <h1 className={styles.pageTitle}>Relatórios</h1>
           <p className={styles.pageSubtitle}>Análise de vendas e desempenho</p>
         </div>
-        <Button variant="primary" onClick={handleExportPDF} loading={exportLoading}>
-          📄 Exportar PDF
+        <Button variant="primary" onClick={handleExportPDF} loading={exportLoading} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <FileText size={18} /> Exportar PDF
         </Button>
       </div>
 
       {/* Stats */}
       <div className={styles.statsGrid}>
         <div className={styles.statCard}>
-          <span className={styles.statIcon}>💰</span>
+          <span className={styles.statIcon}><DollarSign /></span>
           <div>
-            <p className={styles.statValue} style={{ color: 'var(--color-gold)', fontSize: 'var(--fs-xl)' }}>{formatPrice(totalRevenue)}</p>
+            <p className={styles.statValue} style={{ color: 'var(--admin-primary)', fontSize: 'var(--fs-xl)' }}>{formatPrice(totalRevenue)}</p>
             <p className={styles.statLabel}>Receita Total</p>
           </div>
         </div>
         <div className={styles.statCard}>
-          <span className={styles.statIcon}>🛒</span>
+          <span className={styles.statIcon}><ShoppingCart /></span>
           <div>
-            <p className={styles.statValue} style={{ color: 'var(--color-promo)' }}>{MOCK_SALES.length}</p>
+            <p className={styles.statValue} style={{ color: '#10b981' }}>{MOCK_SALES.length}</p>
             <p className={styles.statLabel}>Transações</p>
           </div>
         </div>
         <div className={styles.statCard}>
-          <span className={styles.statIcon}>📦</span>
+          <span className={styles.statIcon}><Package /></span>
           <div>
-            <p className={styles.statValue} style={{ color: 'var(--color-info)' }}>{totalQty}</p>
+            <p className={styles.statValue} style={{ color: '#3b82f6' }}>{totalQty}</p>
             <p className={styles.statLabel}>Itens Vendidos</p>
           </div>
         </div>
         <div className={styles.statCard}>
-          <span className={styles.statIcon}>🏆</span>
+          <span className={styles.statIcon}><Trophy /></span>
           <div>
-            <p className={styles.statValue} style={{ color: 'var(--color-gold)', fontSize: 'var(--fs-sm)' }}>{highlight?.product}</p>
+            <p className={styles.statValue} style={{ color: 'var(--admin-primary)', fontSize: 'var(--fs-sm)' }}>{highlight?.product}</p>
             <p className={styles.statLabel}>Destaque do Dia</p>
           </div>
         </div>

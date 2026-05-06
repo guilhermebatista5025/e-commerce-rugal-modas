@@ -18,6 +18,7 @@
   align-items: center;
   gap: var(--space-3);
   margin-bottom: var(--space-10);
+  flex-wrap: wrap;
 }
 .step {
   display: flex; align-items: center; gap: var(--space-2);
@@ -110,7 +111,9 @@
   display: flex; align-items: center; gap: var(--space-2);
 }
 .qty button {
-  width: 28px; height: 28px;
+  width: 36px; height: 36px;
+  min-width: var(--touch-target);
+  min-height: var(--touch-target);
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-color);
   background: transparent;
@@ -125,7 +128,8 @@
 
 .nextBtn {
   width: 100%;
-  padding: 15px;
+  padding: 16px;
+  min-height: var(--touch-target);
   background: var(--color-gold);
   color: var(--color-black);
   border: none;
@@ -225,10 +229,19 @@
 
 @media (max-width: 900px) {
   .layout { grid-template-columns: 1fr; }
-  .summary { position: static; }
+  .summary { position: static; order: -1; } /* resumo aparece primeiro em mobile */
   .formGrid { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
   .item { grid-template-columns: 72px 1fr; }
   .itemImg { width: 72px; height: 90px; }
+  .steps { gap: var(--space-2); }
+}
+@media (max-width: 480px) {
+  /* esconder label dos steps, mostrar só os números */
+  .step > span + * { display: none; }
+  .title { font-size: var(--fs-2xl); }
+  .formActions { flex-direction: column; }
+  .backBtn { order: 2; }
+  .whatsappBtn { order: 1; }
 }

@@ -15,6 +15,7 @@ export default function Produto() {
   const [selectedSize, setSelectedSize] = useState('');
   const [added, setAdded] = useState(false);
   const [sizeError, setSizeError] = useState(false);
+  const [zoomStyle, setZoomStyle] = useState({});
 
   if (!product) {
     return (
@@ -39,6 +40,23 @@ export default function Produto() {
     setTimeout(() => setAdded(false), 2000);
   };
 
+  const handleMouseMove = (e) => {
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - left) / width) * 100;
+    const y = ((e.clientY - top) / height) * 100;
+    setZoomStyle({
+      transformOrigin: `${x}% ${y}%`,
+      transform: 'scale(2.2)'
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setZoomStyle({
+      transformOrigin: 'center center',
+      transform: 'scale(1)'
+    });
+  };
+
   return (
     <main className={styles.page}>
       <div className="container">
@@ -49,8 +67,17 @@ export default function Produto() {
         <div className={styles.grid}>
           {/* Imagem */}
           <div className={styles.imageSection}>
-            <div className={styles.imageWrap}>
-              <img src={product.image} alt={product.name} className={styles.image} />
+            <div 
+              className={styles.imageWrap}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+            >
+              <img 
+                src={product.image} 
+                alt={product.name} 
+                className={styles.image} 
+                style={zoomStyle}
+              />
               {product.promo && (
                 <span className={styles.badge}>-{discount}% OFF</span>
               )}

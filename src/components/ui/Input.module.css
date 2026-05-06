@@ -29,8 +29,9 @@
   border-radius: var(--radius-md);
   color: var(--text-primary);
   font-family: var(--font-body);
-  font-size: var(--fs-base);
-  padding: 10px 14px;
+  font-size: var(--fs-base); /* min 16px previne zoom auto no iOS */
+  padding: 12px 14px;
+  min-height: var(--touch-target);
   outline: none;
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }

@@ -1,5 +1,6 @@
 // src/pages/admin/Estoque.jsx
 import { useState } from 'react';
+import { Package, AlertTriangle, XCircle } from 'lucide-react';
 import { useProducts } from '../../context/ProductContext';
 import styles from './Admin.module.css';
 
@@ -37,21 +38,21 @@ export default function Estoque() {
       {/* Summary */}
       <div className={styles.statsGrid} style={{ gridTemplateColumns: 'repeat(3,1fr)', maxWidth: 600 }}>
         <div className={styles.statCard}>
-          <span className={styles.statIcon}>📦</span>
+          <span className={styles.statIcon}><Package /></span>
           <div>
             <p className={`${styles.statValue} ${styles['stat_gold']?.split(' ')[0]}`} style={{ color: 'var(--color-gold)' }}>{totalItems}</p>
             <p className={styles.statLabel}>Total em estoque</p>
           </div>
         </div>
         <div className={styles.statCard}>
-          <span className={styles.statIcon}>⚠️</span>
+          <span className={styles.statIcon}><AlertTriangle /></span>
           <div>
             <p className={styles.statValue} style={{ color: 'var(--color-warning)' }}>{lowStock}</p>
             <p className={styles.statLabel}>Estoque baixo (≤3)</p>
           </div>
         </div>
         <div className={styles.statCard}>
-          <span className={styles.statIcon}>❌</span>
+          <span className={styles.statIcon}><XCircle /></span>
           <div>
             <p className={styles.statValue} style={{ color: 'var(--color-danger)' }}>{outOfStock}</p>
             <p className={styles.statLabel}>Sem estoque</p>

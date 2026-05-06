@@ -37,7 +37,7 @@
 
 .sectionTitle {
   font-family: var(--font-display);
-  font-size: var(--fs-2xl);
+  font-size: clamp(var(--fs-xl), 4vw, var(--fs-2xl));
   color: var(--text-primary);
   margin-bottom: var(--space-8);
 }
@@ -195,7 +195,19 @@
   .categoryGrid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
-  .aboutGrid { grid-template-columns: 1fr; }
-  .whatsappBox { flex-direction: column; text-align: center; }
+  .aboutGrid { grid-template-columns: 1fr; gap: var(--space-8); }
+  .whatsappBox { flex-direction: column; text-align: center; padding: var(--space-6) var(--space-5); }
+  .whatsappBox h3 { font-size: var(--fs-xl); }
   .categoryGrid { grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
+  .section { padding: var(--space-10) 0; }
+  .aboutSection { padding: var(--space-10) 0; }
+  .videoWrap { display: none; } /* esconder placeholder de vídeo sem src em mobile */
+  .aboutGrid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .shopBtn { width: 100%; justify-content: center; padding: 14px 24px; font-size: var(--fs-base); }
+  .categoryGrid { gap: var(--space-2); }
+  .catOverlay span { font-size: var(--fs-base); }
+  .whatsappBtn { width: 100%; text-align: center; }
+  .sectionHeader { flex-direction: column; gap: var(--space-3); align-items: flex-start; }
 }

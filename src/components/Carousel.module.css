@@ -6,6 +6,8 @@
   min-height: 520px;
   overflow: hidden;
   background: var(--color-black);
+  /* Prevenir pull-to-refresh interferir com o swipe horizontal */
+  touch-action: pan-y;
 }
 
 .slide {
@@ -22,6 +24,7 @@
   opacity: 1;
   transform: scale(1);
   pointer-events: auto;
+  cursor: pointer;
 }
 
 .overlay {
@@ -29,10 +32,22 @@
   inset: 0;
   background: linear-gradient(
     to right,
-    rgba(0,0,0,0.78) 0%,
-    rgba(0,0,0,0.40) 60%,
+    rgba(0,0,0,0.80) 0%,
+    rgba(0,0,0,0.45) 55%,
     rgba(0,0,0,0.15) 100%
   );
+}
+
+/* em mobile: gradient vem de baixo para cobrir texto */
+@media (max-width: 768px) {
+  .overlay {
+    background: linear-gradient(
+      to top,
+      rgba(0,0,0,0.85) 0%,
+      rgba(0,0,0,0.45) 50%,
+      rgba(0,0,0,0.20) 100%
+    );
+  }
 }
 
 .content {
@@ -80,49 +95,6 @@
   max-width: 400px;
 }
 
-.cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--color-gold);
-  color: var(--color-black);
-  padding: 14px 32px;
-  border-radius: var(--radius-full);
-  font-weight: var(--fw-bold);
-  font-size: var(--fs-base);
-  text-decoration: none;
-  letter-spacing: 0.04em;
-  width: fit-content;
-  transition: all var(--transition-fast);
-  box-shadow: var(--shadow-gold);
-}
-.cta:hover {
-  background: var(--color-gold-light);
-  color: var(--color-black);
-  transform: translateX(4px);
-}
-
-/* Arrows */
-.arrow {
-  position: absolute;
-  top: 50%; transform: translateY(-50%);
-  width: 48px; height: 48px;
-  border-radius: var(--radius-md);
-  background: rgba(0,0,0,0.4);
-  border: 1px solid rgba(255,255,255,0.15);
-  color: #fff;
-  font-size: 28px;
-  line-height: 1;
-  cursor: pointer;
-  z-index: 10;
-  transition: background var(--transition-fast), border-color var(--transition-fast);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.arrow:hover { background: var(--color-gold); border-color: var(--color-gold); color: var(--color-black); }
-.arrowPrev { left: var(--space-5); }
-.arrowNext { right: var(--space-5); }
 
 /* Dots */
 .dots {
@@ -148,7 +120,16 @@
 }
 
 @media (max-width: 768px) {
-  .carousel { height: 70vh; min-height: 420px; }
-  .content { left: 5%; bottom: 12%; max-width: 90%; }
-  .arrow { width: 36px; height: 36px; font-size: 22px; }
+  .carousel { height: 60vh; min-height: 360px; }
+  .content { left: 5%; bottom: 14%; max-width: 90%; gap: var(--space-3); }
+  .dot { width: 10px; height: 10px; }
+  .dotActive { width: 24px; }
+}
+
+@media (max-width: 480px) {
+  .carousel { height: 55vh; min-height: 320px; }
+  .content { bottom: 16%; }
+  .dot { width: 12px; height: 12px; }
+  .dotActive { width: 28px; }
+  .dots { bottom: var(--space-4); gap: var(--space-2); }
 }

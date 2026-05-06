@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-6);
+  padding: calc(var(--navbar-height-mobile) + var(--space-6)) var(--space-4) var(--space-6);
   background:
     radial-gradient(ellipse at 20% 50%, rgba(224,168,72,0.08) 0%, transparent 60%),
     var(--bg-primary);
@@ -118,3 +118,16 @@
   transition: color var(--transition-fast);
 }
 .backLink:hover { color: var(--color-gold); }
+
+@media (max-width: 480px) {
+  .card {
+    padding: var(--space-6) var(--space-5);
+    border-radius: var(--radius-lg);
+  }
+  .logo span { font-size: var(--fs-2xl); }
+  .title { font-size: var(--fs-xl); }
+}
+
+@media (max-width: 360px) {
+  .card { padding: var(--space-5) var(--space-4); }
+}
