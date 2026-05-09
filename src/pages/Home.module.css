@@ -158,46 +158,17 @@
   aspect-ratio: 16/9;
 }
 .storeVideo {
-  
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-/* WhatsApp CTA */
-.whatsappSection { padding: var(--space-12) 0; }
-.whatsappBox {
-  background: linear-gradient(135deg, #1DB954 0%, #17934A 100%);
-  border-radius: var(--radius-xl);
-  padding: var(--space-10) var(--space-12);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-8);
-}
-.whatsappBox h3 { font-size: var(--fs-2xl); color: #fff; }
-.whatsappBox p  { color: rgba(255,255,255,0.85); margin-top: var(--space-2); }
-.whatsappBtn {
-  background: #fff;
-  color: #1DB954;
-  padding: 14px 28px;
-  border-radius: var(--radius-full);
-  font-weight: var(--fw-bold);
-  font-size: var(--fs-base);
-  text-decoration: none;
-  white-space: nowrap;
-  transition: all var(--transition-fast);
-}
-.whatsappBtn:hover { background: var(--color-black); color: #1DB954; }
-
 @media (max-width: 1024px) {
   .categoryGrid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
   .aboutGrid { grid-template-columns: 1fr; gap: var(--space-8); }
-  .whatsappBox { flex-direction: column; text-align: center; padding: var(--space-6) var(--space-5); }
-  .whatsappBox h3 { font-size: var(--fs-xl); }
   .categoryGrid { grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
   .section { padding: var(--space-10) 0; }
   .aboutSection { padding: var(--space-10) 0; }
@@ -208,6 +179,5 @@
   .shopBtn { width: 100%; justify-content: center; padding: 14px 24px; font-size: var(--fs-base); }
   .categoryGrid { gap: var(--space-2); }
   .catOverlay span { font-size: var(--fs-base); }
-  .whatsappBtn { width: 100%; text-align: center; }
   .sectionHeader { flex-direction: column; gap: var(--space-3); align-items: flex-start; }
 }

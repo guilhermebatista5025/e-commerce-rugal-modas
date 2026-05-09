@@ -33,7 +33,7 @@ const SLIDES = [
   },
 ];
 
-export default function Carousel({ autoPlay = true, interval = 5000 }) {
+export default function Carousel({ autoPlay = true, interval = 3000 }) {
   const navigate = useNavigate();
   const [current, setCurrent] = useState(0);
   const [paused, setPaused]   = useState(false);

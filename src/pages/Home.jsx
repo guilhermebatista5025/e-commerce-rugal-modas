@@ -100,26 +100,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* CTA WhatsApp */}
-      <section className={styles.whatsappSection}>
-        <div className="container">
-          <div className={styles.whatsappBox}>
-            <div>
-              <h3>Precisa de ajuda?</h3>
-              <p>Fale diretamente com nossa equipe pelo WhatsApp!</p>
-            </div>
-            <a
-              href="https://wa.me/5527998803770"
-              target="_blank"
-              rel="noreferrer"
-              className={styles.whatsappBtn}
-            >
-              Falar no WhatsApp
-            </a>
-          </div>
-        </div>
-      </section>
     </main>
   );
 }
