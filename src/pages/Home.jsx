@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Truck, ShieldCheck, RotateCcw, CreditCard, ChevronRight } from 'lucide-react';
 import Carousel from '../components/Carousel';
 import BrandsMarquee from '../components/BrandsMarquee';
+import ReviewsSection from '../components/ReviewsSection';
 import styles from './Home.module.css';
 
 const ProductCard = lazy(() => import('../components/ProductCard'));
@@ -78,6 +79,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Avaliações Padrão Ouro */}
+      <ReviewsSection />
 
       {/* Sobre / Loja */}
       <section className={styles.aboutSection}>

@@ -1,0 +1,189 @@
+/* src/components/ReviewsSection.module.css */
+.section {
+  padding: var(--space-24) 0;
+  background: var(--color-black);
+  overflow: hidden;
+  position: relative;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1.8fr;
+  gap: var(--space-20);
+  align-items: center;
+}
+
+.textContent {
+  z-index: 5;
+}
+
+.label {
+  color: var(--color-gold);
+  text-transform: uppercase;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.2em;
+  margin-bottom: var(--space-4);
+  display: block;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--fs-5xl);
+  font-weight: var(--fw-black);
+  line-height: 1;
+  color: var(--color-white);
+  margin-bottom: var(--space-6);
+}
+
+.title span {
+  color: var(--color-gold);
+}
+
+.description {
+  font-size: var(--fs-lg);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-10);
+  max-width: 500px;
+}
+
+.stats {
+  display: flex;
+  gap: var(--space-12);
+  margin-bottom: var(--space-10);
+}
+
+.statValue {
+  display: block;
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-white);
+}
+
+.statLabel {
+  font-size: var(--fs-xs);
+  color: var(--color-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.cta {
+  padding: 16px 40px;
+  background: var(--color-white);
+  color: var(--color-black);
+  border-radius: var(--radius-pill);
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wide);
+  border: none;
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.cta:hover {
+  transform: translateY(-4px);
+  background: var(--color-gold);
+}
+
+/* Reviews Cloud */
+.reviewsCloud {
+  position: relative;
+  height: 600px;
+  width: 100%;
+}
+
+.reviewCard {
+  position: absolute;
+  background: rgba(26, 26, 26, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  width: 280px;
+  box-shadow: var(--shadow-lg);
+  animation: float 6s ease-in-out infinite;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-sm);
+}
+
+.reviewerInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  color: var(--color-white);
+}
+
+.verified {
+  font-size: 10px;
+  color: var(--color-promo);
+  text-transform: uppercase;
+  font-weight: var(--fw-bold);
+}
+
+.googleIcon {
+  margin-left: auto;
+  font-weight: var(--fw-black);
+  color: var(--text-secondary);
+  font-size: var(--fs-md);
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+  margin-bottom: var(--space-2);
+}
+
+.reviewText {
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* Positioning for Cloud Effect */
+.card1 { top: 10%; left: 10%; animation-delay: 0s; }
+.card2 { top: 40%; left: 5%; animation-delay: 1s; }
+.card3 { top: 5%; left: 55%; animation-delay: 2s; }
+.card4 { top: 35%; left: 50%; animation-delay: 0.5s; }
+.card5 { top: 65%; left: 30%; animation-delay: 1.5s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: 1fr; }
+  .reviewsCloud { height: 500px; }
+  .title { font-size: var(--fs-3xl); }
+}
+
+@media (max-width: 768px) {
+  .reviewCard { width: 240px; }
+  .card1 { left: 5%; }
+  .card2 { display: none; }
+  .card5 { left: 10%; bottom: 0; }
+}
