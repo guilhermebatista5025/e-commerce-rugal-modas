@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { Truck, ShieldCheck, RotateCcw, CreditCard, ChevronRight } from 'lucide-react';
 import Carousel from '../components/Carousel';
+import BrandsMarquee from '../components/BrandsMarquee';
 import styles from './Home.module.css';
 
 const ProductCard = lazy(() => import('../components/ProductCard'));
@@ -27,6 +28,9 @@ export default function Home() {
     <main className={styles.home}>
       {/* Hero Carousel */}
       <Carousel />
+
+      {/* Marquee de Marcas */}
+      <BrandsMarquee />
 
       {/* Serviços / Benefícios */}
       <section className={styles.services}>

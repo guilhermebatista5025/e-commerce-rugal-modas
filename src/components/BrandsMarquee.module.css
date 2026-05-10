@@ -1,0 +1,53 @@
+/* src/components/BrandsMarquee.module.css */
+.marqueeSection {
+  background: var(--color-black);
+  padding: var(--space-8) 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.marquee {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+}
+
+.track {
+  display: flex;
+  white-space: nowrap;
+  animation: scroll 40s linear infinite;
+  gap: var(--space-12);
+}
+
+.brandItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--space-8);
+}
+
+.brandName {
+  font-family: var(--font-body);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-black);
+  color: rgba(255, 255, 255, 0.15);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  transition: color var(--transition-base);
+  cursor: default;
+}
+
+.brandItem:hover .brandName {
+  color: var(--color-gold);
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (max-width: 768px) {
+  .track { animation-duration: 25s; gap: var(--space-6); }
+  .brandName { font-size: var(--fs-lg); }
+}
