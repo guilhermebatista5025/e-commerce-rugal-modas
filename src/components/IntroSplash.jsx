@@ -50,7 +50,7 @@ export default function IntroSplash() {
             '--y': `${Math.random() * 100}%`,
             '--delay': `${Math.random() * 2}s`,
             '--size': `${Math.random() * 3 + 1}px`
-          } as any} />
+          }} />
         ))}
       </div>
     </div>
