@@ -32,24 +32,7 @@ export default function Home() {
       {/* Marquee de Marcas */}
       <BrandsMarquee />
 
-      {/* Serviços / Benefícios */}
-      <section className={styles.services}>
-        <div className="container">
-          <div className={styles.servicesGrid}>
-            {SERVICES.map((s, i) => (
-              <div key={i} className={styles.serviceItem}>
-                <div className={styles.serviceIcon}>{s.icon}</div>
-                <div className={styles.serviceText}>
-                  <h3>{s.title}</h3>
-                  <p>{s.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Destaques (Carousel de Produtos em breve, grid por agora mas com estilo limpo) */}
+      {/* Novidades (Destaques) */}
       <section className={styles.section}>
         <div className="container">
           <div className={styles.sectionHeader}>
@@ -61,6 +44,21 @@ export default function Home() {
               {FEATURED.map(p => <ProductCard key={p._id} product={p} />)}
             </Suspense>
           </div>
+        </div>
+      </section>
+
+      {/* Serviços / Benefícios (Agora como Marquee embaixo das Novidades) */}
+      <section className={styles.servicesMarquee}>
+        <div className={styles.marqueeTrack}>
+          {[...SERVICES, ...SERVICES].map((s, i) => (
+            <div key={i} className={styles.serviceItem}>
+              <div className={styles.serviceIcon}>{s.icon}</div>
+              <div className={styles.serviceText}>
+                <h3>{s.title}</h3>
+                <p>{s.desc}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 

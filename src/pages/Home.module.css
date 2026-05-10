@@ -1,37 +1,55 @@
 /* src/pages/Home.module.css */
 .home { overflow-x: hidden; }
 
-/* Services Section */
-.services {
-  padding: var(--space-12) 0;
-  background: var(--bg-primary);
+/* Services Marquee Section */
+.servicesMarquee {
+  background: var(--bg-secondary);
+  padding: var(--space-8) 0;
+  border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
+  overflow: hidden;
+  margin-bottom: var(--space-20);
 }
-.servicesGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-8);
+
+.marqueeTrack {
+  display: flex;
+  white-space: nowrap;
+  animation: scrollServices 30s linear infinite;
+  gap: var(--space-16);
+  width: max-content;
 }
+
 .serviceItem {
   display: flex;
   align-items: center;
   gap: var(--space-4);
+  padding: 0 var(--space-8);
 }
+
 .serviceIcon {
   color: var(--color-gold);
   flex-shrink: 0;
 }
+
 .serviceText h3 {
-  font-size: var(--fs-sm);
+  font-size: var(--fs-xs);
   font-weight: var(--fw-bold);
   text-transform: uppercase;
   letter-spacing: var(--ls-wide);
   color: var(--text-primary);
   margin-bottom: 2px;
 }
+
 .serviceText p {
-  font-size: var(--fs-xs);
+  font-size: 10px;
   color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+@keyframes scrollServices {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 /* Sections */
