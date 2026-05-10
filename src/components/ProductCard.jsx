@@ -1,12 +1,14 @@
-// src/components/ProductCard.jsx
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCart } from '../hooks/useCart';
+import { useUser } from '../context/UserContext';
 import { formatPrice, discountPercent } from '../utils/formatPrice';
 import styles from './ProductCard.module.css';
 
 export default function ProductCard({ product }) {
+  const navigate = useNavigate();
   const { addItem, toggleCart } = useCart();
+  const { user } = useUser();
   const [selectedSize, setSelectedSize] = useState('');
   const [added, setAdded] = useState(false);
   const [sizeError, setSizeError] = useState(false);
@@ -17,6 +19,13 @@ export default function ProductCard({ product }) {
 
   const handleAdd = (e) => {
     e.preventDefault();
+
+    if (!user) {
+      alert('Você precisa estar cadastrado para adicionar produtos ao carrinho.');
+      navigate('/register');
+      return;
+    }
+
     // Se o produto tem tamanhos definidos mas nenhum foi selecionado
     if (product.sizes?.length > 0 && product.sizes[0] !== 'Único' && !selectedSize) {
       setSizeError(true);

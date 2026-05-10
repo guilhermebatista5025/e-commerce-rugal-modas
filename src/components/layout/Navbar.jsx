@@ -1,7 +1,7 @@
 // src/components/layout/Navbar.jsx
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useCart } from '../../context/CartContext';
+import { useCart } from '../../hooks/useCart';
 import { useUser } from '../../context/UserContext';
 import styles from './Navbar.module.css';
 
@@ -47,7 +47,10 @@ export default function Navbar() {
             {user ? (
               <button className={styles.logoutBtn} onClick={handleLogout}>Sair</button>
             ) : (
-              <Link to="/login" className={styles.loginBtn}>Entrar</Link>
+              <>
+                <Link to="/login" className={styles.loginBtn}>Entrar</Link>
+                <Link to="/register" className={styles.registerBtn}>Cadastre-se</Link>
+              </>
             )}
           </div>
 

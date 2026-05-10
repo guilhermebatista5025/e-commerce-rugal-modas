@@ -39,7 +39,7 @@ export default function AdminLayout() {
           
           <div className={styles.topbarRight}>
             <span className={styles.userInfo}>
-              Olá, <strong>{user.name.split(' ')[0]}</strong>
+              Olá, <strong>{user.user_metadata?.full_name?.split(' ')[0] || 'Admin'}</strong>
             </span>
             <button 
               className={styles.themeToggle} 

@@ -1,7 +1,7 @@
 // src/components/CartSidebar.jsx
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../hooks/useCart';
 import { formatPrice } from '../utils/formatPrice';
 import styles from './CartSidebar.module.css';
 

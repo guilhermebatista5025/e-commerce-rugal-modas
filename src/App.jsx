@@ -1,5 +1,4 @@
 // src/App.jsx
-import { CartProvider }    from './context/CartContext';
 import { UserProvider }    from './context/UserContext';
 import { ProductProvider } from './context/ProductContext';
 import { ThemeProvider }   from './context/ThemeContext';
@@ -9,11 +8,9 @@ export default function App() {
   return (
     <UserProvider>
       <ProductProvider>
-        <CartProvider>
-          <ThemeProvider>
-            <AppRouter />
-          </ThemeProvider>
-        </CartProvider>
+        <ThemeProvider>
+          <AppRouter />
+        </ThemeProvider>
       </ProductProvider>
     </UserProvider>
   );

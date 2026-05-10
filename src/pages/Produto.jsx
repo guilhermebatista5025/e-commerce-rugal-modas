@@ -1,15 +1,17 @@
-// src/pages/Produto.jsx
 import { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useProducts } from '../context/ProductContext';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../hooks/useCart';
+import { useUser } from '../context/UserContext';
 import { formatPrice, discountPercent } from '../utils/formatPrice';
 import styles from './Produto.module.css';
 
 export default function Produto() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { products } = useProducts();
   const { addItem, toggleCart } = useCart();
+  const { user } = useUser();
 
   const product = products.find(p => p._id === id);
   const [selectedSize, setSelectedSize] = useState('');
@@ -32,6 +34,12 @@ export default function Produto() {
   const stockQty = selectedSize ? (product.stock?.[selectedSize] || 0) : null;
 
   const handleAdd = () => {
+    if (!user) {
+      alert('Você precisa estar cadastrado para adicionar produtos ao carrinho.');
+      navigate('/register');
+      return;
+    }
+
     if (!selectedSize) { setSizeError(true); return; }
     setSizeError(false);
     addItem(product, selectedSize);
@@ -168,9 +176,23 @@ export default function Produto() {
               >
                 {added ? '✓ Adicionado ao Carrinho!' : hasStock ? '+ Adicionar ao Carrinho' : 'Indisponível'}
               </button>
-              <Link to="/carrinho" className={styles.buyBtn}>
+              <button
+                className={styles.buyBtn}
+                onClick={() => {
+                  if (!user) {
+                    alert('Você precisa estar cadastrado para comprar.');
+                    navigate('/register');
+                    return;
+                  }
+                  if (!selectedSize) { setSizeError(true); return; }
+                  setSizeError(false);
+                  addItem(product, selectedSize);
+                  navigate('/carrinho');
+                }}
+                disabled={!hasStock}
+              >
                 Comprar Agora
-              </Link>
+              </button>
             </div>
 
             {/* Tags */}

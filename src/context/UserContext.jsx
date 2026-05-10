@@ -1,49 +1,68 @@
-// src/context/UserContext.jsx
-import { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { supabase } from '../services/supabase';
 
 const UserContext = createContext(null);
 
-const MOCK_USERS = [
-  { id: 1, name: 'Admin Rugal', email: 'admin@rugal.com', password: 'admin123', role: 'admin' },
-  { id: 2, name: 'Cliente Demo',  email: 'cliente@rugal.com', password: '123456', role: 'cliente' },
-];
-
 export function UserProvider({ children }) {
-  const [user, setUser] = useState(() => {
-    try {
-      const saved = localStorage.getItem('rugal_user');
-      return saved ? JSON.parse(saved) : null;
-    } catch { return null; }
-  });
-  const [loading, setLoading] = useState(false);
-  const [error, setError]     = useState('');
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    // Busca sessão inicial
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+      setLoading(false);
+    });
+
+    // Escuta mudanças de auth (login, logout)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+      setLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   const login = useCallback(async (email, password) => {
     setLoading(true);
     setError('');
-    await new Promise(r => setTimeout(r, 800)); // simula request
-    const found = MOCK_USERS.find(u => u.email === email && u.password === password);
-    if (found) {
-      const { password: _, ...safeUser } = found;
-      setUser(safeUser);
-      localStorage.setItem('rugal_user', JSON.stringify(safeUser));
-      setLoading(false);
-      return { ok: true, user: safeUser };
-    }
-    setError('E-mail ou senha inválidos.');
+    const { data, error: err } = await supabase.auth.signInWithPassword({ email, password });
     setLoading(false);
-    return { ok: false };
+    if (err) {
+      setError(err.message);
+      return { ok: false, error: err.message };
+    }
+    return { ok: true, user: data.user };
   }, []);
 
-  const logout = useCallback(() => {
-    setUser(null);
-    localStorage.removeItem('rugal_user');
+  const register = useCallback(async (email, password, name) => {
+    setLoading(true);
+    setError('');
+    const { data, error: err } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: { full_name: name }
+      }
+    });
+    setLoading(false);
+    if (err) {
+      setError(err.message);
+      return { ok: false, error: err.message };
+    }
+    return { ok: true, user: data.user };
   }, []);
 
-  const isAdmin = user?.role === 'admin';
+  const logout = useCallback(async () => {
+    await supabase.auth.signOut();
+  }, []);
+
+  // Exemplo: se o admin tiver um e-mail específico
+  const isAdmin = user?.email === 'admin@rugal.com';
 
   return (
-    <UserContext.Provider value={{ user, login, logout, loading, error, isAdmin }}>
+    <UserContext.Provider value={{ user, login, register, logout, loading, error, isAdmin }}>
       {children}
     </UserContext.Provider>
   );

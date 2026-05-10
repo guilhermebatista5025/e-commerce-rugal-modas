@@ -13,6 +13,7 @@ const Loja        = lazy(() => import('../pages/Loja'));
 const Produto     = lazy(() => import('../pages/Produto'));
 const Carrinho    = lazy(() => import('../pages/Carrinho'));
 const Login       = lazy(() => import('../pages/Login'));
+const Register    = lazy(() => import('../pages/Register'));
 
 // Admin pages
 const AdminDashboard    = lazy(() => import('../pages/admin/Dashboard'));
@@ -47,8 +48,15 @@ const router = createBrowserRouter([
       { path: '/loja',      element: <Loja /> },
       { path: '/produto/:id', element: <Produto /> },
       { path: '/carrinho',  element: <Carrinho /> },
-      { path: '/login',     element: <Login /> },
     ],
+  },
+  { 
+    path: '/login', 
+    element: <Suspense fallback={<div className="spinner" />}><Login /></Suspense> 
+  },
+  { 
+    path: '/register', 
+    element: <Suspense fallback={<div className="spinner" />}><Register /></Suspense> 
   },
   {
     path: '/admin',

@@ -1,5 +1,5 @@
 // src/components/FilterBar.jsx
-import { CATEGORIES, BRANDS } from '../data/products';
+import { CATEGORIES, BRANDS } from '../utils/constants';
 import Input from './ui/Input';
 import styles from './FilterBar.module.css';
 

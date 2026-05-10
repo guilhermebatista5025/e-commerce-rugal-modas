@@ -6,7 +6,7 @@ import UploadImagem from '../../components/UploadImagem';
 import Input from '../../components/ui/Input';
 import Button from '../../components/ui/Button';
 import Modal from '../../components/ui/Modal';
-import { CATEGORIES, BRANDS, SIZES } from '../../data/products';
+import { CATEGORIES, BRANDS, SIZES } from '../../utils/constants';
 import { Pencil, Plus, Trash2 } from 'lucide-react';
 import styles from './Admin.module.css';
 

@@ -1,7 +1,8 @@
 // src/pages/Carrinho.jsx
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
+import { Link, Navigate } from 'react-router-dom';
+import { useCart } from '../hooks/useCart';
+import { useUser } from '../context/UserContext';
 import { formatPrice } from '../utils/formatPrice';
 import { sendToWhatsApp } from '../utils/generateMessage';
 import Input from '../components/ui/Input';
@@ -11,6 +12,7 @@ const PAYMENT_OPTIONS  = ['PIX', 'Cartão de Crédito', 'Cartão de Débito', 'D
 const DELIVERY_OPTIONS = ['Entrega (Motoboy)', 'Retirar na Loja', 'Correios (PAC)', 'Correios (SEDEX)'];
 
 export default function Carrinho() {
+  const { user } = useUser();
   const { items, removeItem, updateQty, clearCart, totalPrice, totalItems } = useCart();
 
   const [form, setForm] = useState({
@@ -23,6 +25,29 @@ export default function Carrinho() {
   const set = (k, v) => {
     setForm(f => ({ ...f, [k]: v }));
     setErrors(e => ({ ...e, [k]: '' }));
+  };
+
+  const handleCepChange = async (e) => {
+    const rawCep = e.target.value;
+    const cep = rawCep.replace(/\D/g, '');
+    set('cep', rawCep);
+    
+    if (cep.length === 8) {
+      try {
+        const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const data = await res.json();
+        if (!data.erro) {
+          setForm(f => ({
+            ...f,
+            address: `${data.logradouro}, ${data.bairro}`,
+            city: `${data.localidade} / ${data.uf}`
+          }));
+          setErrors(err => ({ ...err, address: '', city: '' }));
+        }
+      } catch (err) {
+        console.error("Erro ao buscar CEP", err);
+      }
+    }
   };
 
   const validate = () => {
@@ -41,6 +66,10 @@ export default function Carrinho() {
     clearCart();
     setStep(1);
   };
+
+  if (!user) {
+    return <Navigate to="/register" replace />;
+  }
 
   if (items.length === 0 && step === 1) {
     return (
@@ -156,7 +185,7 @@ export default function Carrinho() {
                     label="CEP *"
                     id="cep"
                     value={form.cep}
-                    onChange={e => set('cep', e.target.value)}
+                    onChange={handleCepChange}
                     error={errors.cep}
                     placeholder="29000-000"
                   />

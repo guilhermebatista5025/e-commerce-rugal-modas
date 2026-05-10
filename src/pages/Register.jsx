@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
@@ -6,39 +5,48 @@ import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import styles from './Login.module.css';
 
-export default function Login() {
-  const { login, loading, error } = useUser();
+export default function Register() {
+  const { register, loading, error } = useUser();
   const navigate = useNavigate();
-  const [form, setForm] = useState({ email: '', password: '' });
+  const [form, setForm] = useState({ name: '', email: '', password: '' });
   const [localError, setLocalError] = useState('');
 
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
 
   const handleSubmit = async () => {
     setLocalError('');
-    if (!form.email || !form.password) {
-      setLocalError('Preencha e-mail e senha.');
+    if (!form.name || !form.email || !form.password) {
+      setLocalError('Preencha todos os campos.');
       return;
     }
-    const res = await login(form.email, form.password);
+    const res = await register(form.email, form.password, form.name);
     if (res.ok) {
-      navigate(res.user.email === 'admin@rugal.com' ? '/admin' : '/loja');
+      // Assim que cadastrar, redirecionar o cliente para o login
+      alert('Cadastro realizado com sucesso! Faça o login.');
+      navigate('/login');
     }
   };
 
   return (
     <main className={styles.page}>
       <div className={styles.card}>
-        {/* Logo */}
         <div className={styles.logo}>
           <span>RUGAL</span>
           <small>MODAS</small>
         </div>
 
-        <h1 className={styles.title}>Bem-vindo de volta</h1>
-        <p className={styles.subtitle}>Entre na sua conta para continuar</p>
+        <h1 className={styles.title}>Crie sua conta</h1>
+        <p className={styles.subtitle}>Junte-se à Rugal Modas</p>
 
         <div className={styles.form}>
+          <Input
+            label="Nome Completo"
+            id="name"
+            type="text"
+            value={form.name}
+            onChange={e => set('name', e.target.value)}
+            placeholder="Seu nome"
+          />
           <Input
             label="E-mail"
             id="email"
@@ -46,12 +54,6 @@ export default function Login() {
             value={form.email}
             onChange={e => set('email', e.target.value)}
             placeholder="seu@email.com"
-            icon={
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                <polyline points="22,6 12,13 2,6"/>
-              </svg>
-            }
           />
           <Input
             label="Senha"
@@ -60,12 +62,6 @@ export default function Login() {
             value={form.password}
             onChange={e => set('password', e.target.value)}
             placeholder="••••••••"
-            icon={
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                <path d="M7 11V7a5 5 0 0110 0v4"/>
-              </svg>
-            }
           />
 
           {(error || localError) && (
@@ -79,14 +75,12 @@ export default function Login() {
             onClick={handleSubmit}
             size="lg"
           >
-            Entrar
+            Cadastrar
           </Button>
         </div>
 
-
-
         <div className={styles.footer}>
-          <Link to="/loja" className={styles.backLink}>← Continuar sem entrar</Link>
+          <Link to="/login" className={styles.backLink}>← Já tenho uma conta</Link>
         </div>
       </div>
     </main>

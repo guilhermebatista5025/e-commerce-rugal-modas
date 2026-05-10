@@ -11,9 +11,7 @@ import styles from './Home.module.css';
 
 const ProductCard = lazy(() => import('../components/ProductCard'));
 
-import { products } from '../data/products';
-
-const FEATURED = products.filter(p => p.promo).slice(0, 4);
+import { useProducts } from '../context/ProductContext';
 
 const CATEGORIES_SHOWCASE = [
   { label: 'Relógios',  img: '/categorias/relogio1.png',  to: '/loja?category=Relógio' },
@@ -28,6 +26,9 @@ const SERVICES = [
 ];
 
 export default function Home() {
+  const { products } = useProducts();
+  const FEATURED = products.filter(p => p.promo).slice(0, 4);
+
   return (
     <main className={styles.home}>
       {/* Intro Animada */}

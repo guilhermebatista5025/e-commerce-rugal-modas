@@ -1,6 +1,5 @@
-// src/context/ProductContext.jsx
 import { createContext, useContext, useReducer, useCallback, useEffect } from 'react';
-import { products as mockProducts } from '../data/products';
+import { supabase } from '../services/supabase';
 
 const ProductContext = createContext(null);
 
@@ -30,8 +29,50 @@ export function ProductProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, { products: [], loading: true });
 
   useEffect(() => {
-    // Simula carregamento da API
-    setTimeout(() => dispatch({ type: 'SET_PRODUCTS', payload: mockProducts }), 600);
+    async function fetchProducts() {
+      try {
+        const { data, error } = await supabase
+          .from('products')
+          .select('*, skus(*)');
+
+        if (error) throw error;
+
+        // Transforma o formato do banco relacional para o formato que a UI já espera
+        const formattedProducts = data.map(p => {
+          const defaultSku = p.skus[0] || {};
+          
+          const stockMap = {};
+          const sizesArr = [];
+          
+          p.skus.forEach(sku => {
+            sizesArr.push(sku.size);
+            stockMap[sku.size] = sku.stock;
+          });
+
+          return {
+            _id: p.id,
+            code: p.code,
+            name: p.name,
+            description: p.description,
+            brand: p.brand,
+            category: p.category,
+            image: p.image_url,
+            price: defaultSku.price || 0,
+            promo: defaultSku.is_promo || false,
+            promoPrice: defaultSku.promo_price || null,
+            sizes: sizesArr,
+            stock: stockMap,
+          };
+        });
+
+        dispatch({ type: 'SET_PRODUCTS', payload: formattedProducts });
+      } catch (err) {
+        console.error('Erro ao buscar produtos:', err);
+        dispatch({ type: 'SET_LOADING', payload: false });
+      }
+    }
+
+    fetchProducts();
   }, []);
 
   const addProduct    = useCallback(p => dispatch({ type: 'ADD_PRODUCT',    payload: { ...p, _id: Date.now().toString() } }), []);
