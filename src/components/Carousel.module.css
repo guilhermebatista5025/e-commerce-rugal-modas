@@ -48,15 +48,15 @@
 .content {
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  right: 10%;
+  transform: translateY(-50%);
   width: 100%;
-  max-width: 800px;
+  max-width: 700px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: var(--space-6);
+  align-items: flex-end;
+  text-align: right;
+  gap: var(--space-4);
   z-index: 5;
   animation: slideIn 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
@@ -81,19 +81,22 @@
 
 .title {
   font-family: var(--font-display);
-  font-size: clamp(var(--fs-3xl), 8vw, var(--fs-5xl));
+  font-size: clamp(var(--fs-3xl), 8vw, 72px);
   font-weight: var(--fw-black);
-  color: var(--color-white);
-  line-height: 1;
+  color: var(--color-gold); /* Dourado da Logo */
+  line-height: 0.9;
   text-transform: uppercase;
   letter-spacing: var(--ls-tight);
+  text-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
 
 .subtitle {
-  font-size: var(--fs-lg);
-  color: rgba(255,255,255,0.9);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-medium);
+  color: var(--color-white);
   line-height: 1.4;
-  max-width: 600px;
+  max-width: 500px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
 .cta {
