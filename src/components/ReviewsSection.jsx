@@ -13,13 +13,11 @@ export default function ReviewsSection() {
   return (
     <section className={styles.section}>
       <div className="container">
-        <div className={styles.grid}>
-          {/* Coluna da Esquerda: Card de Autoridade */}
-          <div className={styles.authorityCard}>
-            <div className={styles.cardBg}>
-              <img src="/images/authority-bg.png" alt="Autoridade Rugal Modas" />
-              <div className={styles.overlay} />
-            </div>
+        <div className={styles.authorityBoard}>
+          {/* Background Card */}
+          <div className={styles.mainCard}>
+            <img src="/images/authority-bg.png" alt="Autoridade Rugal Modas" className={styles.bgImage} />
+            <div className={styles.overlay} />
             
             <div className={styles.cardContent}>
               <span className={styles.label}>Autoridade & Confiança</span>
@@ -28,7 +26,7 @@ export default function ReviewsSection() {
               </h2>
               <p className={styles.description}>
                 Nossa prioridade é a sua satisfação absoluta. Com milhares de clientes atendidos, 
-                mantemos a excelência em cada peça e no atendimento exclusivo que você merece.
+                mantemos a excelência em cada detalhe.
               </p>
               
               <div className={styles.stats}>
@@ -38,7 +36,7 @@ export default function ReviewsSection() {
                 </div>
                 <div className={styles.statItem}>
                   <span className={styles.statValue}>4.9/5</span>
-                  <span className={styles.statLabel}>Nota Google</span>
+                  <span className={styles.statLabel}>Google</span>
                 </div>
               </div>
               
@@ -48,8 +46,8 @@ export default function ReviewsSection() {
             </div>
           </div>
 
-          {/* Coluna da Direita: Nuvem de Cards */}
-          <div className={styles.reviewsCloud}>
+          {/* Floating Reviews (Now integrated over/beside the card) */}
+          <div className={styles.reviewsOverlay}>
             {REVIEWS.map((review, i) => (
               <div key={review.id} className={[styles.reviewCard, styles[`card${i + 1}`]].join(' ')}>
                 <div className={styles.cardHeader}>
@@ -58,13 +56,13 @@ export default function ReviewsSection() {
                   </div>
                   <div className={styles.reviewerInfo}>
                     <span className={styles.name}>{review.name}</span>
-                    <span className={styles.verified}>Avaliação Verificada</span>
+                    <span className={styles.verified}>Verificada</span>
                   </div>
                   <div className={styles.googleIcon}>G</div>
                 </div>
                 <div className={styles.stars}>
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={14} fill="var(--color-gold)" color="var(--color-gold)" />
+                    <Star key={i} size={12} fill="var(--color-gold)" color="var(--color-gold)" />
                   ))}
                 </div>
                 <p className={styles.reviewText}>"{review.text}"</p>
