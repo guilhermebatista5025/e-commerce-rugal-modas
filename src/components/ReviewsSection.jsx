@@ -14,29 +14,38 @@ export default function ReviewsSection() {
     <section className={styles.section}>
       <div className="container">
         <div className={styles.grid}>
-          {/* Coluna da Esquerda: Texto */}
-          <div className={styles.textContent}>
-            <span className={styles.label}>Autoridade & Confiança</span>
-            <h2 className={styles.title}>
-              PADRÃO OURO <br /> <span>5 ESTRELAS</span>
-            </h2>
-            <p className={styles.description}>
-              Nossa prioridade é a sua satisfação. Com milhares de clientes atendidos, 
-              mantemos a excelência em cada peça e no atendimento exclusivo que você merece.
-            </p>
-            <div className={styles.stats}>
-              <div className={styles.statItem}>
-                <span className={styles.statValue}>+5.000</span>
-                <span className={styles.statLabel}>Clientes Satisfeitos</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statValue}>4.9/5</span>
-                <span className={styles.statLabel}>No Google Business</span>
-              </div>
+          {/* Coluna da Esquerda: Card de Autoridade */}
+          <div className={styles.authorityCard}>
+            <div className={styles.cardBg}>
+              <img src="/images/authority-bg.png" alt="Autoridade Rugal Modas" />
+              <div className={styles.overlay} />
             </div>
-            <button className={styles.cta}>
-              Ver Todas Avaliações
-            </button>
+            
+            <div className={styles.cardContent}>
+              <span className={styles.label}>Autoridade & Confiança</span>
+              <h2 className={styles.title}>
+                PADRÃO OURO <br /> <span>5 ESTRELAS</span>
+              </h2>
+              <p className={styles.description}>
+                Nossa prioridade é a sua satisfação absoluta. Com milhares de clientes atendidos, 
+                mantemos a excelência em cada peça e no atendimento exclusivo que você merece.
+              </p>
+              
+              <div className={styles.stats}>
+                <div className={styles.statItem}>
+                  <span className={styles.statValue}>+5.000</span>
+                  <span className={styles.statLabel}>Clientes</span>
+                </div>
+                <div className={styles.statItem}>
+                  <span className={styles.statValue}>4.9/5</span>
+                  <span className={styles.statLabel}>Nota Google</span>
+                </div>
+              </div>
+              
+              <button className={styles.cta}>
+                Ver Avaliações
+              </button>
+            </div>
           </div>
 
           {/* Coluna da Direita: Nuvem de Cards */}
