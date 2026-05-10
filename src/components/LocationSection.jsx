@@ -20,7 +20,7 @@ export default function LocationSection() {
                 <MapPin className={styles.icon} size={20} />
                 <div>
                   <h4>Endereço</h4>
-                  <p>Av. Campinas, 1234 - Vila Independência, Limeira - SP</p>
+                  <p>R. Cap. José Maria, 1378 - Centro, Linhares - ES, 29900-010</p>
                 </div>
               </div>
               
@@ -36,13 +36,13 @@ export default function LocationSection() {
                 <Phone className={styles.icon} size={20} />
                 <div>
                   <h4>Contato</h4>
-                  <p>(19) 99999-9999</p>
+                  <p>(27) 99891-9877</p>
                 </div>
               </div>
             </div>
 
             <div className={styles.actions}>
-              <a href="https://wa.me/5519999999999" target="_blank" rel="noreferrer" className={styles.btnWhatsapp}>
+              <a href="https://wa.me/5527998919877" target="_blank" rel="noreferrer" className={styles.btnWhatsapp}>
                 <MessageCircle size={18} /> Chamar no WhatsApp
               </a>
             </div>
@@ -60,7 +60,7 @@ export default function LocationSection() {
       <div className={styles.mapContainer}>
         <div className={styles.mapShadowTop} />
         <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.58288544974!2d-47.4019236!3d-22.5573424!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8651f67605d5d%3A0x6b446162594a500b!2sLimeira%2C%20SP!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.215243308472!2d-40.06976942318799!3d-19.40310382212098!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb6259a99afd189%3A0xa4523d4f470c07fb!2sRugal%20Modas!5e0!3m2!1spt-BR!2sbr!4v1778437937537!5m2!1spt-BR!2sbr" 
           width="100%" 
           height="450" 
           style={{ border: 0 }} 
