@@ -1,62 +1,87 @@
 /* src/pages/Loja.module.css */
 .page {
-  padding-top: calc(var(--navbar-height) + var(--space-10));
-  padding-bottom: var(--space-20);
+  padding: var(--space-20) 0;
+  background: var(--color-black);
   min-height: 100vh;
 }
 
 .header {
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-12);
 }
+
 .title {
   font-family: var(--font-display);
-  font-size: var(--fs-3xl);
-  color: var(--color-gold);
+  font-size: var(--fs-4xl);
+  font-weight: var(--fw-black);
+  color: var(--color-white);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-tight);
 }
+
 .subtitle {
   color: var(--text-secondary);
+  font-size: var(--fs-sm);
   margin-top: var(--space-2);
 }
 
-/* Skeleton */
+/* Grid Override para 5 colunas estilo TYP */
+:global(.products-grid) {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-2); /* TYP usa pouco espaço */
+}
+
 .loadingGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: var(--space-6);
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-2);
 }
+
 .skeleton {
-  aspect-ratio: 3/5;
-  border-radius: var(--radius-lg);
-  background: linear-gradient(90deg, var(--bg-card) 25%, var(--color-gray-border) 50%, var(--bg-card) 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.4s infinite;
+  aspect-ratio: 3/4;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-sm);
+  animation: pulse 1.5s infinite ease-in-out;
 }
 
-@keyframes shimmer {
-  0%   { background-position: 200% center; }
-  100% { background-position: -200% center; }
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
 }
 
-/* Empty state */
 .empty {
   text-align: center;
   padding: var(--space-20) 0;
   color: var(--text-secondary);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-5);
-  font-size: var(--fs-lg);
 }
+
 .resetBtn {
-  padding: 10px 24px;
+  margin-top: var(--space-6);
+  padding: 12px 24px;
   background: var(--color-gold);
   color: var(--color-black);
   border: none;
-  border-radius: var(--radius-full);
-  font-family: var(--font-body);
-  font-weight: var(--fw-semi);
+  border-radius: var(--radius-pill);
+  font-weight: var(--fw-bold);
   cursor: pointer;
-  transition: background var(--transition-fast);
 }
-.resetBtn:hover { background: var(--color-gold-light); }
+
+@media (max-width: 1440px) {
+  :global(.products-grid), .loadingGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  :global(.products-grid), .loadingGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  :global(.products-grid), .loadingGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-1);
+  }
+  .title { font-size: var(--fs-3xl); }
+}
