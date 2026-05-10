@@ -12,7 +12,7 @@ export default function IntroSplash() {
     // Finaliza o splash
     const endTimer = setTimeout(() => {
       setIsVisible(false);
-    }, 4500);
+    }, 3200);
 
     return () => {
       clearTimeout(startTimer);

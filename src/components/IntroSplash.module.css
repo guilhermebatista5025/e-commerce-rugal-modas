@@ -11,7 +11,7 @@
 }
 
 .animateOut {
-  animation: finalFadeOut 1s cubic-bezier(0.7, 0, 0.3, 1) forwards 3.8s;
+  animation: finalFadeOut 0.8s cubic-bezier(0.7, 0, 0.3, 1) forwards 2.5s;
 }
 
 .layers div {
@@ -21,9 +21,9 @@
   opacity: 0;
 }
 
-.layer1 { animation: pulseLayer 3s ease-in-out infinite; }
-.layer2 { animation: pulseLayer 3s ease-in-out infinite 1s; }
-.layer3 { animation: pulseLayer 3s ease-in-out infinite 2s; }
+.layer1 { animation: pulseLayer 2s ease-in-out infinite; }
+.layer2 { animation: pulseLayer 2s ease-in-out infinite 0.5s; }
+.layer3 { animation: pulseLayer 2s ease-in-out infinite 1s; }
 
 @keyframes pulseLayer {
   0%, 100% { opacity: 0; transform: scale(0.8); }
@@ -52,15 +52,15 @@
   display: inline-block;
   opacity: 0;
   transform: rotateY(-90deg) translateZ(100px);
-  animation: letterReveal 1.2s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards;
+  animation: letterReveal 0.8s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards;
   text-shadow: 0 0 30px rgba(224, 168, 72, 0.5);
 }
 
-.letter:nth-child(1) { animation-delay: 0.1s; }
-.letter:nth-child(2) { animation-delay: 0.2s; }
-.letter:nth-child(3) { animation-delay: 0.3s; }
-.letter:nth-child(4) { animation-delay: 0.4s; }
-.letter:nth-child(5) { animation-delay: 0.5s; }
+.letter:nth-child(1) { animation-delay: 0.05s; }
+.letter:nth-child(2) { animation-delay: 0.1s; }
+.letter:nth-child(3) { animation-delay: 0.15s; }
+.letter:nth-child(4) { animation-delay: 0.2s; }
+.letter:nth-child(5) { animation-delay: 0.25s; }
 
 @keyframes letterReveal {
   to {
@@ -75,7 +75,7 @@
   height: 2px;
   background: linear-gradient(to right, transparent, var(--color-gold), transparent);
   margin: 20px 0;
-  animation: expandLine 1.5s ease-out forwards 1.2s;
+  animation: expandLine 1s ease-out forwards 0.8s;
 }
 
 @keyframes expandLine {
@@ -89,7 +89,7 @@
   text-transform: uppercase;
   opacity: 0;
   transform: translateY(20px);
-  animation: fadeInTag 1s ease-out forwards 1.8s;
+  animation: fadeInTag 0.8s ease-out forwards 1.2s;
 }
 
 @keyframes fadeInTag {
