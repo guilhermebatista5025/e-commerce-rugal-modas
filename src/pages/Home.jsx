@@ -4,6 +4,7 @@ import { Truck, ShieldCheck, RotateCcw, CreditCard, ChevronRight } from 'lucide-
 import Carousel from '../components/Carousel';
 import BrandsMarquee from '../components/BrandsMarquee';
 import ReviewsSection from '../components/ReviewsSection';
+import LocationSection from '../components/LocationSection';
 import IntroSplash from '../components/IntroSplash';
 import Reveal from '../components/Reveal';
 import styles from './Home.module.css';
@@ -110,6 +111,11 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Localização */}
+      <Reveal>
+        <LocationSection />
+      </Reveal>
 
       {/* Serviços / Benefícios (Invertido e no final) */}
       <section className={styles.servicesMarquee}>
