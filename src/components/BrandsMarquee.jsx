@@ -1,7 +1,13 @@
 import styles from './BrandsMarquee.module.css';
 
 const BRANDS = [
-  'Nike', 'Colcci', 'Prison', 'Malwee', 'Streat', 'Forum', 'Renner', 'C&A'
+  { name: 'Nike', domain: 'nike.com' },
+  { name: 'Colcci', domain: 'colcci.com.br' },
+  { name: 'Prison', domain: 'useprison.com.br' },
+  { name: 'Malwee', domain: 'malwee.com.br' },
+  { name: 'Forum', domain: 'forum.com.br' },
+  { name: 'Renner', domain: 'lojasrenner.com.br' },
+  { name: 'C&A', domain: 'cea.com.br' },
 ];
 
 export default function BrandsMarquee() {
@@ -14,7 +20,13 @@ export default function BrandsMarquee() {
         <div className={styles.track}>
           {doubledBrands.map((brand, i) => (
             <div key={i} className={styles.brandItem}>
-              <span className={styles.brandName}>{brand}</span>
+              <img 
+                src={`https://logo.clearbit.com/${brand.domain}`} 
+                alt={brand.name} 
+                className={styles.brandLogo} 
+                onError={(e) => e.target.style.display = 'none'}
+              />
+              <span className={styles.brandName}>{brand.name}</span>
             </div>
           ))}
         </div>

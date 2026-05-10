@@ -95,15 +95,23 @@
 
 .reviewCard {
   position: absolute;
-  background: rgba(26, 26, 26, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: var(--space-4);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: var(--space-5);
   border-radius: var(--radius-lg);
-  width: 280px;
-  box-shadow: var(--shadow-lg);
+  width: 300px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
   animation: float 6s ease-in-out infinite;
+  cursor: pointer;
+  transition: transform var(--transition-base), border-color var(--transition-base);
+}
+
+.reviewCard:hover {
+  border-color: var(--color-gold);
+  transform: scale(1.02) translateY(-10px) !important;
+  z-index: 10;
 }
 
 .cardHeader {

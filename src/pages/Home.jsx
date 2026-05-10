@@ -48,21 +48,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Serviços / Benefícios (Agora como Marquee embaixo das Novidades) */}
-      <section className={styles.servicesMarquee}>
-        <div className={styles.marqueeTrack}>
-          {[...SERVICES, ...SERVICES].map((s, i) => (
-            <div key={i} className={styles.serviceItem}>
-              <div className={styles.serviceIcon}>{s.icon}</div>
-              <div className={styles.serviceText}>
-                <h3>{s.title}</h3>
-                <p>{s.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* Dual Category Banners */}
       <section className={styles.dualBanners}>
         <div className="container">
@@ -103,6 +88,21 @@ export default function Home() {
                </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Serviços / Benefícios (Invertido e no final) */}
+      <section className={styles.servicesMarquee}>
+        <div className={styles.marqueeTrackInverted}>
+          {[...SERVICES, ...SERVICES].map((s, i) => (
+            <div key={i} className={styles.serviceItem}>
+              <div className={styles.serviceIcon}>{s.icon}</div>
+              <div className={styles.serviceText}>
+                <h3>{s.title}</h3>
+                <p>{s.desc}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
     </main>
