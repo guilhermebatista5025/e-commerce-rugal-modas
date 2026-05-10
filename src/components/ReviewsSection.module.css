@@ -84,6 +84,46 @@
   max-width: 400px;
 }
 
+.stats {
+  display: flex;
+  gap: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+.statValue {
+  display: block;
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-white);
+}
+
+.statLabel {
+  font-size: 10px;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.cta {
+  width: fit-content;
+  padding: 14px 32px;
+  background: var(--color-gold);
+  color: var(--color-black);
+  border-radius: var(--radius-pill);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wide);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.cta:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-gold);
+}
+
 /* Integrated Reviews Overlay */
 .reviewsOverlay {
   position: absolute;
