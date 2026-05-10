@@ -1,6 +1,7 @@
 // src/components/Carousel.jsx
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import styles from './Carousel.module.css';
 
 const SLIDES = [
@@ -90,9 +91,20 @@ export default function Carousel({ autoPlay = true, interval = 3000 }) {
             )}
             <h1 className={styles.title}>{slide.title}</h1>
             <p className={styles.subtitle}>{slide.subtitle}</p>
+            <div className={styles.actions}>
+               <button className={styles.cta}>{slide.cta}</button>
+            </div>
           </div>
         </div>
       ))}
+
+      {/* Navigation Arrows */}
+      <button className={[styles.navBtn, styles.prev].join(' ')} onClick={(e) => { e.stopPropagation(); prev(); }} aria-label="Anterior">
+        <ChevronLeft size={32} />
+      </button>
+      <button className={[styles.navBtn, styles.next].join(' ')} onClick={(e) => { e.stopPropagation(); next(); }} aria-label="Próximo">
+        <ChevronRight size={32} />
+      </button>
 
       {/* Dots */}
       <div className={styles.dots}>

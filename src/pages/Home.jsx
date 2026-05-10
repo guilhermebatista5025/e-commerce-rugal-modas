@@ -1,6 +1,6 @@
-// src/pages/Home.jsx
 import { lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
+import { Truck, ShieldCheck, RotateCcw, CreditCard, ChevronRight } from 'lucide-react';
 import Carousel from '../components/Carousel';
 import styles from './Home.module.css';
 
@@ -13,8 +13,13 @@ const FEATURED = products.filter(p => p.promo).slice(0, 4);
 const CATEGORIES_SHOWCASE = [
   { label: 'Relógios',  img: '/categorias/relogio1.png',  to: '/loja?category=Relógio' },
   { label: 'Masculino', img: '/categorias/conjunto1.png', to: '/loja?category=Masculino' },
-  { label: 'Óculos',   img: '/categorias/oculos1.png',   to: '/loja?category=Óculos' },
-  { label: 'Calçados', img: '/categorias/tenis1.png',    to: '/loja?category=Calçados' },
+];
+
+const SERVICES = [
+  { icon: <Truck size={24} />, title: 'Entrega Rápida', desc: 'Envio para todo o Brasil' },
+  { icon: <ShieldCheck size={24} />, title: 'Compra Segura', desc: 'Seus dados 100% protegidos' },
+  { icon: <RotateCcw size={24} />, title: 'Devolução Fácil', desc: 'Até 7 dias para trocar' },
+  { icon: <CreditCard size={24} />, title: 'Pagamento Flexível', desc: 'Até 12x no cartão' },
 ];
 
 export default function Home() {
@@ -23,42 +28,29 @@ export default function Home() {
       {/* Hero Carousel */}
       <Carousel />
 
-      {/* Acesso rápido */}
-      <section className={styles.quickAccess}>
+      {/* Serviços / Benefícios */}
+      <section className={styles.services}>
         <div className="container">
-          <Link to="/loja" className={styles.shopBtn}>
-             Acessar Loja Completa
-          </Link>
-        </div>
-      </section>
-
-      {/* Categorias */}
-      <section className={styles.section}>
-        <div className="container">
-          <h2 className={styles.sectionTitle}>
-            <span>Explore por</span> Categoria
-          </h2>
-          <div className={styles.categoryGrid}>
-            {CATEGORIES_SHOWCASE.map(cat => (
-              <Link key={cat.label} to={cat.to} className={styles.catCard}>
-                <img src={cat.img} alt={cat.label} loading="lazy" />
-                <div className={styles.catOverlay}>
-                  <span>{cat.label}</span>
+          <div className={styles.servicesGrid}>
+            {SERVICES.map((s, i) => (
+              <div key={i} className={styles.serviceItem}>
+                <div className={styles.serviceIcon}>{s.icon}</div>
+                <div className={styles.serviceText}>
+                  <h3>{s.title}</h3>
+                  <p>{s.desc}</p>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Promoções */}
-      <section className={[styles.section, styles.promoSection].join(' ')}>
+      {/* Destaques (Carousel de Produtos em breve, grid por agora mas com estilo limpo) */}
+      <section className={styles.section}>
         <div className="container">
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>
-              <span className={styles.promoTag}>PROMOÇÃO</span> Destaques
-            </h2>
-            <Link to="/loja" className={styles.seeAll}>Ver todos →</Link>
+            <h2 className={styles.sectionTitle}>Novidades</h2>
+            <Link to="/loja" className={styles.seeAll}>Ver todos</Link>
           </div>
           <div className="products-grid">
             <Suspense fallback={<div className="spinner" />}>
@@ -68,38 +60,45 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Vídeo / Sobre */}
+      {/* Dual Category Banners */}
+      <section className={styles.dualBanners}>
+        <div className="container">
+          <div className={styles.bannersGrid}>
+            {CATEGORIES_SHOWCASE.map(cat => (
+              <Link key={cat.label} to={cat.to} className={styles.bannerCard}>
+                <img src={cat.img} alt={cat.label} loading="lazy" />
+                <div className={styles.bannerContent}>
+                  <h3>{cat.label}</h3>
+                  <span className={styles.bannerCta}>Descobrir <ChevronRight size={16} /></span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Sobre / Loja */}
       <section className={styles.aboutSection}>
         <div className="container">
           <div className={styles.aboutGrid}>
             <div className={styles.aboutText}>
-              <h2>Nossa Loja</h2>
+              <span className={styles.label}>Rugal Modas</span>
+              <h2>Estilo e Qualidade em cada detalhe</h2>
               <p>
                 A Rugal Modas nasceu da paixão por moda acessível e de qualidade.
-                Com anos no mercado, oferecemos as melhores peças para toda a família,
-                com atendimento personalizado e preços que cabem no bolso.
+                Oferecemos as melhores peças com curadoria exclusiva para quem busca estilo e conforto.
               </p>
-              <ul className={styles.benefits}>
-                <li>✓ Entrega rápida para todo o Brasil</li>
-                <li>✓ Atendimento via WhatsApp</li>
-                <li>✓ Promoções semanais</li>
-                <li>✓ Qualidade garantida</li>
-              </ul>
-              <Link to="/loja" className={styles.ctaAbout}>Conhecer Produtos</Link>
+              <Link to="/loja" className={styles.ctaAbout}>Conhecer Loja</Link>
             </div>
             <div className={styles.videoWrap}>
-              <video
-                src="#"
-                autoPlay
-                loop
-                muted
-                playsInline
-                className={styles.storeVideo}
-              />
+               <div className={styles.placeholderImg}>
+                  {/* Substituindo vídeo sem src por uma imagem premium ou placeholder estilizado */}
+                  <img src="/images/loja-placeholder.png" alt="Nossa Loja" />
+               </div>
             </div>
           </div>
         </div>
       </section>
     </main>
   );
-}
+}
