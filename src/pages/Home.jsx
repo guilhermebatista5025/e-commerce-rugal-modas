@@ -4,6 +4,8 @@ import { Truck, ShieldCheck, RotateCcw, CreditCard, ChevronRight } from 'lucide-
 import Carousel from '../components/Carousel';
 import BrandsMarquee from '../components/BrandsMarquee';
 import ReviewsSection from '../components/ReviewsSection';
+import IntroSplash from '../components/IntroSplash';
+import Reveal from '../components/Reveal';
 import styles from './Home.module.css';
 
 const ProductCard = lazy(() => import('../components/ProductCard'));
@@ -27,22 +29,33 @@ const SERVICES = [
 export default function Home() {
   return (
     <main className={styles.home}>
+      {/* Intro Animada */}
+      <IntroSplash />
+
       {/* Hero Carousel */}
       <Carousel />
 
       {/* Marquee de Marcas */}
-      <BrandsMarquee />
+      <Reveal delay={0.2}>
+        <BrandsMarquee />
+      </Reveal>
 
       {/* Novidades (Destaques) */}
       <section className={styles.section}>
         <div className="container">
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Novidades</h2>
-            <Link to="/loja" className={styles.seeAll}>Ver todos</Link>
-          </div>
+          <Reveal>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Novidades</h2>
+              <Link to="/loja" className={styles.seeAll}>Ver todos</Link>
+            </div>
+          </Reveal>
           <div className="products-grid">
             <Suspense fallback={<div className="spinner" />}>
-              {FEATURED.map(p => <ProductCard key={p._id} product={p} />)}
+              {FEATURED.map((p, i) => (
+                <Reveal key={p._id} delay={i * 0.1}>
+                  <ProductCard product={p} />
+                </Reveal>
+              ))}
             </Suspense>
           </div>
         </div>
@@ -52,41 +65,48 @@ export default function Home() {
       <section className={styles.dualBanners}>
         <div className="container">
           <div className={styles.bannersGrid}>
-            {CATEGORIES_SHOWCASE.map(cat => (
-              <Link key={cat.label} to={cat.to} className={styles.bannerCard}>
-                <img src={cat.img} alt={cat.label} loading="lazy" />
-                <div className={styles.bannerContent}>
-                  <h3>{cat.label}</h3>
-                  <span className={styles.bannerCta}>Descobrir <ChevronRight size={16} /></span>
-                </div>
-              </Link>
+            {CATEGORIES_SHOWCASE.map((cat, i) => (
+              <Reveal key={cat.label} delay={i * 0.2}>
+                <Link to={cat.to} className={styles.bannerCard}>
+                  <img src={cat.img} alt={cat.label} loading="lazy" />
+                  <div className={styles.bannerContent}>
+                    <h3>{cat.label}</h3>
+                    <span className={styles.bannerCta}>Descobrir <ChevronRight size={16} /></span>
+                  </div>
+                </Link>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* Avaliações Padrão Ouro */}
-      <ReviewsSection />
+      <Reveal>
+        <ReviewsSection />
+      </Reveal>
 
       {/* Sobre / Loja */}
       <section className={styles.aboutSection}>
         <div className="container">
           <div className={styles.aboutGrid}>
-            <div className={styles.aboutText}>
-              <span className={styles.label}>Rugal Modas</span>
-              <h2>Estilo e Qualidade em cada detalhe</h2>
-              <p>
-                A Rugal Modas nasceu da paixão por moda acessível e de qualidade.
-                Oferecemos as melhores peças com curadoria exclusiva para quem busca estilo e conforto.
-              </p>
-              <Link to="/loja" className={styles.ctaAbout}>Conhecer Loja</Link>
-            </div>
-            <div className={styles.videoWrap}>
-               <div className={styles.placeholderImg}>
-                  {/* Substituindo vídeo sem src por uma imagem premium ou placeholder estilizado */}
-                  <img src="/images/loja-placeholder.png" alt="Nossa Loja" />
-               </div>
-            </div>
+            <Reveal width="100%">
+              <div className={styles.aboutText}>
+                <span className={styles.label}>Rugal Modas</span>
+                <h2>Estilo e Qualidade em cada detalhe</h2>
+                <p>
+                  A Rugal Modas nasceu da paixão por moda acessível e de qualidade.
+                  Oferecemos as melhores peças com curadoria exclusiva para quem busca estilo e conforto.
+                </p>
+                <Link to="/loja" className={styles.ctaAbout}>Conhecer Loja</Link>
+              </div>
+            </Reveal>
+            <Reveal width="100%">
+              <div className={styles.videoWrap}>
+                 <div className={styles.placeholderImg}>
+                    <img src="/images/loja-placeholder.png" alt="Nossa Loja" />
+                 </div>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
