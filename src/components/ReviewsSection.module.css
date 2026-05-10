@@ -41,17 +41,24 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 100%);
+  background: linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 100%);
+  z-index: 2;
 }
 
 .cardContent {
-  position: relative;
-  z-index: 5;
+  position: absolute;
+  inset: 0;
+  z-index: 10;
   width: 50%;
-  padding: var(--space-12);
+  padding: 0 var(--space-12);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  pointer-events: none; /* Deixar passar cliques se necessário, mas os filhos reativam */
+}
+
+.cardContent > * {
+  pointer-events: auto;
 }
 
 .label {
