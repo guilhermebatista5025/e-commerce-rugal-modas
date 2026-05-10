@@ -1,14 +1,15 @@
 // src/components/Carousel.jsx
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import styles from './Carousel.module.css';
 
 const SLIDES = [
   {
     id: 1,
     image: '/images/imagem1.png',
-    title: 'Nova Coleção Jaquetas',
-    subtitle: 'Peças leves, modernas e cheias de estilo para os dias frios.',
+    title: 'URBAN ELEGANCE',
+    subtitle: 'Descubra a nova coleção Outono/Inverno com peças exclusivas que definem o seu estilo.',
     cta: 'Ver Coleção',
     link: '/loja?category=Feminino',
     badge: 'NOVO',
@@ -16,8 +17,8 @@ const SLIDES = [
   {
     id: 2,
     image: '/images/imagem2.png',
-    title: 'Moda Masculina',
-    subtitle: 'Do casual ao social, encontre o look perfeito para cada momento.',
+    title: 'ESSENTIALS FOR HIM',
+    subtitle: 'O equilíbrio perfeito entre o casual e o sofisticado para o homem moderno.',
     cta: 'Explorar',
     link: '/loja?category=Masculino',
     badge: null,
@@ -25,8 +26,8 @@ const SLIDES = [
   {
     id: 3,
     image: '/images/imagem3.png',
-    title: 'Promoções Especiais',
-    subtitle: 'Até 40% OFF em centenas de produtos selecionados.',
+    title: 'GOLD SELECTION',
+    subtitle: 'Peças selecionadas com qualidade ouro e descontos de até 40% OFF.',
     cta: 'Ver Ofertas',
     link: '/loja',
     badge: 'PROMO',
@@ -90,9 +91,20 @@ export default function Carousel({ autoPlay = true, interval = 3000 }) {
             )}
             <h1 className={styles.title}>{slide.title}</h1>
             <p className={styles.subtitle}>{slide.subtitle}</p>
+            <div className={styles.actions}>
+               <button className={styles.cta}>{slide.cta}</button>
+            </div>
           </div>
         </div>
       ))}
+
+      {/* Navigation Arrows */}
+      <button className={[styles.navBtn, styles.prev].join(' ')} onClick={(e) => { e.stopPropagation(); prev(); }} aria-label="Anterior">
+        <ChevronLeft size={32} />
+      </button>
+      <button className={[styles.navBtn, styles.next].join(' ')} onClick={(e) => { e.stopPropagation(); next(); }} aria-label="Próximo">
+        <ChevronRight size={32} />
+      </button>
 
       {/* Dots */}
       <div className={styles.dots}>

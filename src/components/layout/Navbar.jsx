@@ -26,13 +26,7 @@ export default function Navbar() {
   return (
     <nav className={[styles.nav, scrolled ? styles.scrolled : ''].join(' ')}>
       <div className={styles.inner}>
-        {/* Logo */}
-        <Link to="/" className={styles.logo}>
-          <span className={styles.logoText}>RUGAL</span>
-          <span className={styles.logoSub}>MODAS</span>
-        </Link>
-
-        {/* Links desktop */}
+        {/* Links desktop (Esquerda) */}
         <ul className={[styles.links, menuOpen ? styles.open : ''].join(' ')}>
           <li><Link to="/"     className={location.pathname === '/'     ? styles.active : ''}>Home</Link></li>
           <li><Link to="/loja" className={location.pathname === '/loja' ? styles.active : ''}>Loja</Link></li>
@@ -41,13 +35,21 @@ export default function Navbar() {
           )}
         </ul>
 
-        {/* Ações */}
+        {/* Logo (Centro) */}
+        <Link to="/" className={styles.logo}>
+          <span className={styles.logoText}>RUGAL</span>
+          <span className={styles.logoSub}>MODAS</span>
+        </Link>
+
+        {/* Ações (Direita) */}
         <div className={styles.actions}>
-          {user ? (
-            <button className={styles.logoutBtn} onClick={handleLogout}>Sair</button>
-          ) : (
-            <Link to="/login" className={styles.loginBtn}>Entrar</Link>
-          )}
+          <div className={styles.userActions}>
+            {user ? (
+              <button className={styles.logoutBtn} onClick={handleLogout}>Sair</button>
+            ) : (
+              <Link to="/login" className={styles.loginBtn}>Entrar</Link>
+            )}
+          </div>
 
           <button className={styles.cartBtn} onClick={toggleCart} aria-label="Carrinho">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

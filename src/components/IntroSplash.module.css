@@ -1,0 +1,135 @@
+/* src/components/IntroSplash.module.css */
+.splashContainer {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.animateOut {
+  animation: finalFadeOut 0.6s cubic-bezier(0.7, 0, 0.3, 1) forwards 1.8s;
+}
+
+.layers div {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(224, 168, 72, 0.15) 0%, transparent 70%);
+  opacity: 0;
+}
+
+.layer1 { animation: pulseLayer 1.5s ease-in-out infinite; }
+.layer2 { animation: pulseLayer 1.5s ease-in-out infinite 0.3s; }
+.layer3 { animation: pulseLayer 1.5s ease-in-out infinite 0.6s; }
+
+@keyframes pulseLayer {
+  0%, 100% { opacity: 0; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.5); }
+}
+
+.content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logoContainer {
+  display: flex;
+  gap: 10px;
+  perspective: 1000px;
+}
+
+.letter {
+  font-family: var(--font-display);
+  font-size: clamp(60px, 15vw, 160px);
+  font-weight: 900;
+  color: #fff;
+  display: inline-block;
+  opacity: 0;
+  transform: rotateY(-90deg) translateZ(100px);
+  animation: letterReveal 0.5s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards;
+  text-shadow: 0 0 30px rgba(224, 168, 72, 0.5);
+}
+
+.letter:nth-child(1) { animation-delay: 0.03s; }
+.letter:nth-child(2) { animation-delay: 0.06s; }
+.letter:nth-child(3) { animation-delay: 0.09s; }
+.letter:nth-child(4) { animation-delay: 0.12s; }
+.letter:nth-child(5) { animation-delay: 0.15s; }
+
+@keyframes letterReveal {
+  to {
+    opacity: 1;
+    transform: rotateY(0) translateZ(0);
+    color: var(--color-gold);
+  }
+}
+
+.shimmerLine {
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--color-gold), transparent);
+  margin: 15px 0;
+  animation: expandLine 0.7s ease-out forwards 0.6s;
+}
+
+@keyframes expandLine {
+  to { width: 300px; }
+}
+
+.tagline {
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 0.8em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(15px);
+  animation: fadeInTag 0.6s ease-out forwards 1s;
+}
+
+@keyframes fadeInTag {
+  to { opacity: 0.7; transform: translateY(0); }
+}
+
+/* Partículas */
+.particles {
+  position: absolute;
+  inset: 0;
+}
+
+.particle {
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  width: var(--size);
+  height: var(--size);
+  background: var(--color-gold);
+  border-radius: 50%;
+  opacity: 0;
+  animation: floatParticle 3s infinite var(--delay);
+}
+
+@keyframes floatParticle {
+  0% { opacity: 0; transform: translateY(0) scale(0); }
+  50% { opacity: 0.8; transform: translateY(-50px) scale(1); }
+  100% { opacity: 0; transform: translateY(-100px) scale(0); }
+}
+
+@keyframes finalFadeOut {
+  to {
+    opacity: 0;
+    transform: scale(1.5);
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 768px) {
+  .letter { font-size: 60px; }
+  .logoContainer { gap: 5px; }
+  @keyframes expandLine { to { width: 150px; } }
+}

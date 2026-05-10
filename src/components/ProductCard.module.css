@@ -9,9 +9,9 @@
   flex-direction: column;
 }
 .card:hover {
-  transform: translateY(-4px);
-  border-color: var(--color-gold-dark);
-  box-shadow: var(--shadow-gold);
+  transform: translateY(-8px);
+  border-color: var(--color-gold);
+  box-shadow: var(--shadow-lg);
 }
 .outOfStock { opacity: 0.65; }
 
@@ -85,11 +85,13 @@
 }
 
 .name {
-  font-family: var(--font-display);
-  font-size: var(--fs-base);
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
   font-weight: var(--fw-bold);
   color: var(--text-primary);
-  line-height: 1.3;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wide);
   transition: color var(--transition-fast);
 }
 .name:hover { color: var(--color-gold); }
@@ -140,17 +142,23 @@
 /* Add button */
 .addBtn {
   margin-top: auto;
-  padding: 9px;
-  background: var(--color-gold);
-  color: var(--color-black);
-  border: none;
-  border-radius: var(--radius-md);
+  padding: 12px;
+  background: var(--color-black);
+  color: var(--color-white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-pill);
   font-family: var(--font-body);
-  font-size: var(--fs-sm);
-  font-weight: var(--fw-semi);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
   cursor: pointer;
   transition: all var(--transition-fast);
-  letter-spacing: 0.04em;
+  letter-spacing: var(--ls-wide);
+}
+.addBtn:hover:not(:disabled) {
+  background: var(--color-gold);
+  color: var(--color-black);
+  border-color: var(--color-gold);
 }
 .addBtn:hover:not(:disabled) { background: var(--color-gold-light); }
 .added { background: var(--color-promo) !important; color: #fff !important; }

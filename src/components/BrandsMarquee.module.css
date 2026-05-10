@@ -1,0 +1,66 @@
+/* src/components/BrandsMarquee.module.css */
+.marqueeSection {
+  background: var(--color-black);
+  padding: var(--space-8) 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.marquee {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+}
+
+.track {
+  display: flex;
+  white-space: nowrap;
+  animation: scroll 40s linear infinite;
+  gap: var(--space-12);
+}
+
+.brandItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--space-8);
+  gap: var(--space-4);
+}
+
+.brandLogo {
+  height: 32px;
+  width: auto;
+  filter: grayscale(1) invert(1) opacity(0.3);
+  transition: all var(--transition-base);
+}
+
+.brandItem:hover .brandLogo {
+  filter: grayscale(0) invert(0) opacity(1);
+  transform: scale(1.1);
+}
+
+.brandName {
+  font-family: var(--font-body);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-black);
+  color: rgba(255, 255, 255, 0.1);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  transition: color var(--transition-base);
+  cursor: default;
+}
+
+.brandItem:hover .brandName {
+  color: var(--color-gold);
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (max-width: 768px) {
+  .track { animation-duration: 25s; gap: var(--space-6); }
+  .brandName { font-size: var(--fs-lg); }
+}
