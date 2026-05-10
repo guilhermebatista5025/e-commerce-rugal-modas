@@ -1,14 +1,13 @@
 // supabase/functions/checkout/index.ts
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.4";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-serve(async (req) => {
-  // Trata a requisição CORS (Preflight) enviada pelos navegadores
+Deno.serve(async (req) => {
+  // 1. Trata CORS Preflight
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders });
   }
@@ -16,28 +15,34 @@ serve(async (req) => {
   try {
     const { items, customer } = await req.json();
 
+    // Validação básica de entrada
     if (!items || !Array.isArray(items) || items.length === 0) {
-      return new Response(JSON.stringify({ error: 'Carrinho vazio.' }), {
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        status: 400,
-      });
+      throw new Error('O carrinho está vazio.');
     }
 
-    // Inicializa o cliente do Supabase com a SERVICE_ROLE_KEY.
-    // Isso é essencial pois o backend precisa de poderes administrativos para consultar o banco e bypassar o RLS.
-    const supabaseClient = createClient(
-      Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
-    );
+    // 2. Inicializa o cliente com SERVICE_ROLE para bypassar RLS
+    const supabaseUrl = Deno.env.get('SUPABASE_URL') ?? '';
+    const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
+    
+    if (!supabaseUrl || !supabaseServiceKey) {
+      throw new Error('Configurações do Supabase não encontradas.');
+    }
+
+    const supabaseClient = createClient(supabaseUrl, supabaseServiceKey);
 
     let totalAmount = 0;
     const validatedItems = [];
 
-    // Regra de Ouro: O backend recalcula e valida o preço/estoque de cada item.
+    // 3. Validação de cada item no banco de dados
     for (const item of items) {
-      // Como estamos enviando a "key" no formato "product_id-size", vamos extrair.
-      // O ideal no futuro (após você cadastrar os dados no Supabase) é já enviar apenas o sku_id.
-      const [productId, size] = item.key.split('-');
+      // Divide a chave "id-tamanho" (ex: "uuid-M")
+      if (!item.key || !item.key.includes('-')) {
+        throw new Error(`Formato de item inválido: ${item.product?.name || 'Item desconhecido'}`);
+      }
+
+      const parts = item.key.split('-');
+      const size = parts.pop(); // Pega o último elemento (tamanho)
+      const productId = parts.join('-'); // O resto é o ID (caso o ID tenha hífens)
 
       const { data: skuData, error: skuError } = await supabaseClient
         .from('skus')
@@ -47,15 +52,14 @@ serve(async (req) => {
         .single();
 
       if (skuError || !skuData) {
-        throw new Error(`SKU não encontrado para o produto ${productId} e tamanho ${size}.`);
+        console.error(`Erro SKU:`, skuError);
+        throw new Error(`Produto ou tamanho não encontrado: ${item.product?.name} (${size})`);
       }
 
-      // Validação de Estoque Dinâmico
       if (skuData.stock < item.qty) {
-        throw new Error(`Estoque insuficiente para o tamanho ${size}. Temos apenas ${skuData.stock} unidade(s).`);
+        throw new Error(`Estoque insuficiente para ${item.product?.name}. Restam apenas ${skuData.stock} unidades.`);
       }
 
-      // Validação de Preço (Evita que o frontend forje preços)
       const currentPrice = skuData.is_promo ? skuData.promo_price : skuData.price;
       totalAmount += currentPrice * item.qty;
 
@@ -66,22 +70,23 @@ serve(async (req) => {
       });
     }
 
-    // TODO: Consultar API de Frete (Ex: Melhor Envio / Correios) e somar em totalAmount.
-
-    // Criar o Pedido no Banco de Dados (Status: pending)
+    // 4. Criação do Pedido
+    // Nota: Recomendo adicionar colunas de customer_name/address na tabela 'orders' futuramente
     const { data: orderData, error: orderError } = await supabaseClient
       .from('orders')
       .insert({
         total_amount: totalAmount,
         status: 'pending',
-        // user_id: (aqui você poderia extrair o user_id do JWT caso a loja exija login)
+        // Opcional: Você pode salvar os dados do cliente em um JSONB ou colunas específicas aqui
       })
       .select('id')
       .single();
 
-    if (orderError) throw orderError;
+    if (orderError || !orderData) {
+      throw new Error(`Erro ao criar pedido: ${orderError?.message}`);
+    }
 
-    // Inserir os Itens relacionados ao Pedido
+    // 5. Inserção dos Itens do Pedido
     const orderItemsToInsert = validatedItems.map(vi => ({
       order_id: orderData.id,
       sku_id: vi.sku_id,
@@ -93,25 +98,32 @@ serve(async (req) => {
       .from('order_items')
       .insert(orderItemsToInsert);
 
-    if (itemsError) throw itemsError;
+    if (itemsError) {
+      throw new Error(`Erro ao inserir itens: ${itemsError.message}`);
+    }
 
-    // TODO: Gerar intenção de pagamento no Stripe / MercadoPago usando o totalAmount real.
-    const paymentLink = "https://link-de-pagamento-ficticio.com/checkout/123";
-
+    // 6. Resposta de Sucesso
     return new Response(
       JSON.stringify({ 
-        message: 'Checkout processado com segurança no servidor.', 
+        message: 'Pedido criado com sucesso!', 
         total_amount: totalAmount,
         order_id: orderData.id,
-        payment_link: paymentLink 
+        payment_link: "https://checkout.exemplo.com/" + orderData.id // Substituir pela integração real
       }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 }
+      { 
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }, 
+        status: 200 
+      }
     );
 
-  } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), {
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      status: 400,
-    });
+  } catch (error: any) {
+    console.error("Checkout Error:", error);
+    return new Response(
+      JSON.stringify({ error: error.message || 'Erro interno no servidor' }), 
+      { 
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }, 
+        status: 400 
+      }
+    );
   }
 });
