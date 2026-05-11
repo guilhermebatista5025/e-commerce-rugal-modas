@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'SUBSTITUA_PELA_SUA_URL_SUPABASE';
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'SUBSTITUA_PELA_SUA_CHAVE_ANON';
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://mock.supabase.co';
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'mock_key';
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
