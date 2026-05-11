@@ -13,7 +13,8 @@ export default function Register() {
 
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e?.preventDefault();
     setLocalError('');
     if (!form.name || !form.email || !form.password) {
       setLocalError('Preencha todos os campos.');
@@ -38,7 +39,7 @@ export default function Register() {
         <h1 className={styles.title}>Crie sua conta</h1>
         <p className={styles.subtitle}>Junte-se à Rugal Modas</p>
 
-        <div className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <Input
             label="Nome Completo"
             id="name"
@@ -72,12 +73,12 @@ export default function Register() {
             variant="primary"
             fullWidth
             loading={loading}
-            onClick={handleSubmit}
+            type="submit"
             size="lg"
           >
             Cadastrar
           </Button>
-        </div>
+        </form>
 
         <div className={styles.footer}>
           <Link to="/login" className={styles.backLink}>← Já tenho uma conta</Link>

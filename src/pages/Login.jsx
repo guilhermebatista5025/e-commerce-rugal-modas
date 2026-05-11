@@ -14,7 +14,8 @@ export default function Login() {
 
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e?.preventDefault();
     setLocalError('');
     if (!form.email || !form.password) {
       setLocalError('Preencha e-mail e senha.');
@@ -22,7 +23,7 @@ export default function Login() {
     }
     const res = await login(form.email, form.password);
     if (res.ok) {
-      navigate(res.user.email === 'admin@rugal.com' ? '/admin' : '/loja');
+      navigate(res.user.email === 'admin@rugal.com' ? '/admin' : '/');
     }
   };
 
@@ -38,7 +39,7 @@ export default function Login() {
         <h1 className={styles.title}>Bem-vindo de volta</h1>
         <p className={styles.subtitle}>Entre na sua conta para continuar</p>
 
-        <div className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <Input
             label="E-mail"
             id="email"
@@ -76,17 +77,17 @@ export default function Login() {
             variant="primary"
             fullWidth
             loading={loading}
-            onClick={handleSubmit}
+            type="submit"
             size="lg"
           >
             Entrar
           </Button>
-        </div>
+        </form>
 
 
 
         <div className={styles.footer}>
-          <Link to="/loja" className={styles.backLink}>← Continuar sem entrar</Link>
+          <Link to="/" className={styles.backLink}>← Continuar sem entrar</Link>
         </div>
       </div>
     </main>

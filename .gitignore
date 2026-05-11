@@ -12,7 +12,9 @@ node_modules
 .env.development.local
 .env.test.local
 .env.production.local
-
+test_supabase.js
+test_register.js
+test_auth.js
 # Logs
 npm-debug.log*
 yarn-debug.log*
