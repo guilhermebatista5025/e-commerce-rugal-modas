@@ -4,57 +4,7 @@ import styles from './LocationSection.module.css';
 export default function LocationSection() {
   return (
     <section className={styles.section}>
-      <div className="container">
-        <div className={styles.infoGrid}>
-          {/* Coluna 1: Textos */}
-          <div className={styles.infoContent}>
-            <span className={styles.label}>Nossa Loja</span>
-            <h2 className={styles.title}>VENHA NOS <br /> <span>VISITAR</span></h2>
-            <p className={styles.description}>
-              Localizada no coração de Limeira, nossa loja física oferece uma experiência 
-              exclusiva para você conferir de perto a qualidade de cada peça.
-            </p>
-            
-            <div className={styles.details}>
-              <div className={styles.detailItem}>
-                <MapPin className={styles.icon} size={20} />
-                <div>
-                  <h4>Endereço</h4>
-                  <p>R. Cap. José Maria, 1378 - Centro, Linhares - ES, 29900-010</p>
-                </div>
-              </div>
-              
-              <div className={styles.detailItem}>
-                <Clock className={styles.icon} size={20} />
-                <div>
-                  <h4>Horário</h4>
-                  <p>Seg a Sex: 09h às 18h | Sáb: 09h às 13h</p>
-                </div>
-              </div>
 
-              <div className={styles.detailItem}>
-                <Phone className={styles.icon} size={20} />
-                <div>
-                  <h4>Contato</h4>
-                  <p>(27) 99891-9877</p>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.actions}>
-              <a href="https://wa.me/5527998919877" target="_blank" rel="noreferrer" className={styles.btnWhatsapp}>
-                <MessageCircle size={18} /> Chamar no WhatsApp
-              </a>
-            </div>
-          </div>
-
-          {/* Coluna 2: Placeholder de Foto da Loja ou Call-out */}
-          <div className={styles.imageCard}>
-            <img src="/images/loja-placeholder.png" alt="Interior da Loja" className={styles.storeImg} />
-            <div className={styles.imageOverlay} />
-          </div>
-        </div>
-      </div>
 
       {/* Mapa Full Width com Sombras/Gradientes de Integração */}
       <div className={styles.mapContainer}>

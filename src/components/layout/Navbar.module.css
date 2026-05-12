@@ -205,6 +205,35 @@
     grid-template-columns: auto 1fr auto;
     padding: 0 var(--space-4);
   }
-  .links { display: none; }
+  .burger { display: flex; }
+  
+  .links {
+    position: fixed;
+    top: var(--navbar-height);
+    left: 0;
+    right: 0;
+    height: calc(100vh - var(--navbar-height));
+    background: rgba(10, 10, 10, 0.98);
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: var(--space-12);
+    gap: var(--space-8);
+    transform: translateY(-150%);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+    z-index: -1;
+    pointer-events: none;
+    border-bottom: 2px solid var(--color-gold);
+  }
+  .links.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .links a {
+    font-size: var(--fs-xl);
+    font-family: var(--font-display);
+    font-weight: var(--fw-bold);
+  }
   .userActions { display: none; }
 }

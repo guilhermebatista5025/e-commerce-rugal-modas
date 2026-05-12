@@ -1,7 +1,7 @@
 /* src/components/LocationSection.module.css */
 .section {
   background: var(--color-black);
-  padding: var(--space-24) 0 0 0; /* Sem padding inferior para o mapa encostar no footer */
+  padding: 0;
   overflow: hidden;
 }
 

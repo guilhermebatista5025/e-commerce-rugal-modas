@@ -98,7 +98,10 @@
 .seeAll:hover { color: var(--color-gold); }
 
 /* Dual Banners */
-.dualBanners { padding-bottom: var(--space-20); }
+.dualBanners { 
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-20); 
+}
 .bannersGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -110,6 +113,14 @@
   overflow: hidden;
   display: block;
   text-decoration: none;
+}
+.bannerCard::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%);
+  z-index: 1;
+  pointer-events: none;
 }
 .bannerCard img {
   width: 100%;
@@ -216,7 +227,8 @@
 
 @media (max-width: 768px) {
   .servicesGrid { grid-template-columns: 1fr; gap: var(--space-4); }
-  .section { padding: var(--space-12) 0; }
+  .section { padding: var(--space-8) 0; }
   .aboutSection { padding: var(--space-12) 0; }
   .videoWrap { order: -1; aspect-ratio: 16/9; }
+  .bannerCta { display: none; }
 }

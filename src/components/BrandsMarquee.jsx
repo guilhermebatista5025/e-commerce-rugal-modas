@@ -2,12 +2,12 @@ import styles from './BrandsMarquee.module.css';
 
 const BRANDS = [
   { name: 'Nike', domain: 'nike.com' },
-  { name: 'Colcci', domain: 'colcci.com.br' },
-  { name: 'Prison', domain: 'useprison.com.br' },
-  { name: 'Malwee', domain: 'malwee.com.br' },
-  { name: 'Forum', domain: 'forum.com.br' },
-  { name: 'Renner', domain: 'lojasrenner.com.br' },
-  { name: 'C&A', domain: 'cea.com.br' },
+  { name: 'Jordan', domain: 'jordan.com' },
+  { name: 'High', domain: 'highcompanybr.com' },
+  { name: 'Fire', domain: 'fire.com' },
+  { name: 'Vans', domain: 'vans.com.br' },
+  { name: 'Supreme', domain: 'supremenewyork.com' },
+  { name: 'Off-White', domain: 'off---white.com' },
 ];
 
 export default function BrandsMarquee() {

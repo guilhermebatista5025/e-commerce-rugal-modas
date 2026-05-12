@@ -1,0 +1,88 @@
+/* src/components/ProductCarousel.module.css */
+.carouselContainer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: var(--space-4) 0;
+  margin-top: var(--space-6);
+}
+
+.carouselTrack {
+  display: flex;
+  overflow-x: auto;
+  gap: var(--space-6);
+  padding: var(--space-2) var(--space-4) var(--space-10) var(--space-4); /* Extra bottom padding for shadows */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  cursor: grab;
+  width: 100%;
+}
+
+.carouselTrack::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.carouselTrack.active {
+  cursor: grabbing;
+  scroll-behavior: auto; /* Disable smooth scroll while dragging */
+}
+
+.cardWrapper {
+  flex: 0 0 280px; /* Fixed width for cards in carousel */
+  min-width: 280px;
+  pointer-events: auto; /* Ensure cards can still be clicked */
+}
+
+.carouselTrack.dragging .cardWrapper {
+  pointer-events: none; /* Prevent clicks while dragging */
+}
+
+.arrowBtn {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(20, 20, 20, 0.7); /* Dark semi-transparent background */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-white);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.arrowBtn:hover {
+  background: var(--color-gold);
+  color: var(--color-black);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.leftArrow {
+  left: -24px;
+}
+
+.rightArrow {
+  right: -24px;
+}
+
+@media (max-width: 768px) {
+  .leftArrow { left: 4px; }
+  .rightArrow { right: 4px; }
+  .arrowBtn {
+    width: 40px;
+    height: 40px;
+  }
+  .cardWrapper {
+    flex: 0 0 240px;
+    min-width: 240px;
+  }
+}
