@@ -1,64 +1,51 @@
-import { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { supabase } from '../services/supabase';
+import { createContext, useContext, useState, useCallback } from 'react';
 
 const UserContext = createContext(null);
 
+// ⚠️  MODO FICTÍCIO — branch dev/login-ficticio
+// Usuário admin sempre autenticado. Sem chamadas reais ao Supabase Auth.
+const MOCK_ADMIN = {
+  id: 'mock-admin-001',
+  email: 'admin@rugal.com',
+  user_metadata: { full_name: 'Admin Rugal' },
+};
+
 export function UserProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(MOCK_ADMIN);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    // Busca sessão inicial
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
-
-    // Escuta mudanças de auth (login, logout)
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  const login = useCallback(async (email, password) => {
+  // Login fictício: aceita qualquer credencial e redireciona como admin
+  const login = useCallback(async (_email, _password) => {
     setLoading(true);
     setError('');
-    const { data, error: err } = await supabase.auth.signInWithPassword({ email, password });
+    await new Promise(r => setTimeout(r, 400)); // simula delay de rede
+    setUser(MOCK_ADMIN);
     setLoading(false);
-    if (err) {
-      setError(err.message);
-      return { ok: false, error: err.message };
-    }
-    return { ok: true, user: data.user };
+    return { ok: true, user: MOCK_ADMIN };
   }, []);
 
-  const register = useCallback(async (email, password, name) => {
+  // Registro fictício: sempre bem-sucedido
+  const register = useCallback(async (email, _password, name) => {
     setLoading(true);
     setError('');
-    const { data, error: err } = await supabase.auth.signUp({
+    await new Promise(r => setTimeout(r, 400));
+    const mockUser = {
+      id: 'mock-user-' + Date.now(),
       email,
-      password,
-      options: {
-        data: { full_name: name }
-      }
-    });
+      user_metadata: { full_name: name },
+    };
+    setUser(mockUser);
     setLoading(false);
-    if (err) {
-      setError(err.message);
-      return { ok: false, error: err.message };
-    }
-    return { ok: true, user: data.user };
+    return { ok: true, user: mockUser };
   }, []);
 
+  // Logout fictício: não faz nada (mantém sessão)
   const logout = useCallback(async () => {
-    await supabase.auth.signOut();
+    // No mock mode, logout mantém o admin logado
+    setUser(MOCK_ADMIN);
   }, []);
 
-  // Exemplo: se o admin tiver um e-mail específico
   const isAdmin = user?.email === 'admin@rugal.com';
 
   return (

@@ -36,8 +36,57 @@ export default function Login() {
           <small>MODAS</small>
         </div>
 
+        {/* Banner modo ficticio */}
+        <div style={{
+          background: 'linear-gradient(135deg, rgba(245,158,11,0.13), rgba(245,158,11,0.07))',
+          border: '1px solid rgba(245,158,11,0.5)',
+          borderRadius: '10px',
+          padding: '12px 16px',
+          marginBottom: '20px',
+          textAlign: 'center',
+        }}>
+          <p style={{ color: '#f59e0b', fontWeight: 700, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.1em', margin: 0 }}>
+            Modo Ficticio Ativo
+          </p>
+          <p style={{ color: 'rgba(245,158,11,0.8)', fontSize: '12px', margin: '4px 0 0' }}>
+            Qualquer credencial ou o botao abaixo te leva ao dashboard
+          </p>
+        </div>
+
         <h1 className={styles.title}>Bem-vindo de volta</h1>
         <p className={styles.subtitle}>Entre na sua conta para continuar</p>
+
+        {/* Botao de acesso rapido ao admin */}
+        <button
+          id="admin-quick-access"
+          onClick={() => navigate('/admin')}
+          style={{
+            width: '100%',
+            padding: '14px',
+            marginBottom: '20px',
+            background: 'linear-gradient(135deg, #f59e0b, #d97706)',
+            color: '#000',
+            border: 'none',
+            borderRadius: '10px',
+            fontWeight: 800,
+            fontSize: '14px',
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
+            cursor: 'pointer',
+            boxShadow: '0 4px 20px rgba(245,158,11,0.27)',
+            transition: 'transform 0.2s',
+          }}
+          onMouseEnter={e => (e.currentTarget.style.transform = 'translateY(-2px)')}
+          onMouseLeave={e => (e.currentTarget.style.transform = 'translateY(0)')}
+        >
+          Acessar Dashboard Direto
+        </button>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
+          <div style={{ flex: 1, height: 1, background: 'var(--border-color)' }} />
+          <span style={{ color: 'var(--text-secondary)', fontSize: 12 }}>ou entre com e-mail</span>
+          <div style={{ flex: 1, height: 1, background: 'var(--border-color)' }} />
+        </div>
 
         <form className={styles.form} onSubmit={handleSubmit}>
           <Input
@@ -46,7 +95,7 @@ export default function Login() {
             type="email"
             value={form.email}
             onChange={e => set('email', e.target.value)}
-            placeholder="seu@email.com"
+            placeholder="qualquer@email.com"
             icon={
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -60,7 +109,7 @@ export default function Login() {
             type="password"
             value={form.password}
             onChange={e => set('password', e.target.value)}
-            placeholder="••••••••"
+            placeholder="qualquer senha"
             icon={
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
@@ -84,10 +133,8 @@ export default function Login() {
           </Button>
         </form>
 
-
-
         <div className={styles.footer}>
-          <Link to="/" className={styles.backLink}>← Continuar sem entrar</Link>
+          <Link to="/" className={styles.backLink}>Continuar sem entrar</Link>
         </div>
       </div>
     </main>
